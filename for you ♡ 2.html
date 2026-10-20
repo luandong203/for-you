@@ -504,6 +504,22 @@ body.is-admin .viewer-only { display: none !important; }
 </div>
 
 <script>
+/* ================= HỖ TRỢ LƯU TRỮ AN TOÀN ================= */
+function safeGetStorage(key){
+  try { return localStorage.getItem(key); } catch(e){ return null; }
+}
+function safeSetStorage(key, val){
+  try { localStorage.setItem(key, val); } catch(e){}
+}
+function safeRemoveStorage(key){
+  try { localStorage.removeItem(key); } catch(e){}
+}
+function safeGetSession(key){
+  try { return sessionStorage.getItem(key); } catch(e){ return null; }
+}
+function safeSetSession(key, val){
+  try { sessionStorage.setItem(key, val); } catch(e){}
+}
 /* ================= PHÂN QUYỀN ADMIN & NGƯỜI XEM (KHÔNG CẦN LOGIN) ================= */
 var modeToast = document.getElementById('modeToast');
 var toastTimer = null;
@@ -525,7 +541,7 @@ function checkIsAdminUrl(){
 }
 
 var isAdmin = false;
-var savedMode = sessionStorage.getItem('fy_mode');
+var savedMode = safeGetSession('fy_mode');
 if (savedMode === 'admin'){
   isAdmin = true;
 } else if (savedMode === 'viewer'){
@@ -539,15 +555,16 @@ function setMode(adminState, showFeedback){
   if (isAdmin){
     document.body.classList.remove('is-viewer');
     document.body.classList.add('is-admin');
-    sessionStorage.setItem('fy_mode', 'admin');
+    safeSetSession('fy_mode', 'admin');
     if (showFeedback) showToast('👑 Chế độ Quản Trị Viên (Đã bật chỉnh sửa)');
   } else {
     document.body.classList.remove('is-admin');
     document.body.classList.add('is-viewer');
-    sessionStorage.setItem('fy_mode', 'viewer');
+    safeSetSession('fy_mode', 'viewer');
     if (showFeedback) showToast('✨ Chế độ Người Xem (Giao diện trong lành)');
   }
-  if (typeof renderGallery === 'function') renderGallery();
+  var galEl = document.getElementById('gal');
+  if (galEl && typeof renderGallery === 'function') renderGallery();
 }
 
 // Chạm / click 3 lần nhanh vào ngôi sao ✦ để bật/tắt quyền Quản trị bí mật
@@ -588,15 +605,15 @@ var DEFAULT_CONFIG = {
   photos: {}
 };
 
-var savedStart = localStorage.getItem('fy_startDate');
+var savedStart = safeGetStorage('fy_startDate');
 if (!savedStart || savedStart === '2026-01-01'){
   savedStart = DEFAULT_CONFIG.startDate;
-  localStorage.setItem('fy_startDate', savedStart);
+  safeSetStorage('fy_startDate', savedStart);
 }
 
 // Đọc cấu hình từ localStorage nếu có
 var config = {
-  crushName: localStorage.getItem('fy_crushName') !== null ? localStorage.getItem('fy_crushName') : DEFAULT_CONFIG.crushName,
+  crushName: safeGetStorage('fy_crushName') !== null ? safeGetStorage('fy_crushName') : DEFAULT_CONFIG.crushName,
   startDate: savedStart,
   caps: DEFAULT_CONFIG.caps
 };
@@ -611,7 +628,6 @@ function applyConfig(){
   }
 }
 applyConfig();
-setMode(isAdmin, false);
 
 /* ================= LỜI CHÚC TỰ GÕ ================= */
 var WISHES = [
@@ -738,10 +754,12 @@ var modalImg = document.getElementById('modalImg');
 var modalCap = document.getElementById('modalCap');
 
 function getSavedPhoto(i){
-  return localStorage.getItem('fy_photo_' + i) || (DEFAULT_CONFIG.photos && DEFAULT_CONFIG.photos[i]) || '';
+  return safeGetStorage('fy_photo_' + i) || (DEFAULT_CONFIG.photos && DEFAULT_CONFIG.photos[i]) || '';
 }
 
 function renderGallery(){
+  if (!gal) gal = document.getElementById('gal');
+  if (!gal) return;
   gal.innerHTML = '';
   config.caps.forEach(function(cap, i){
     var d = document.createElement('div');
@@ -786,7 +804,7 @@ function renderGallery(){
     btn.onclick = function(e){
       e.stopPropagation();
       var idx = this.getAttribute('data-idx');
-      localStorage.removeItem('fy_photo_' + idx);
+      safeRemoveStorage('fy_photo_' + idx);
       if (DEFAULT_CONFIG.photos && DEFAULT_CONFIG.photos[idx]){
         delete DEFAULT_CONFIG.photos[idx];
       }
@@ -796,13 +814,14 @@ function renderGallery(){
   });
 }
 renderGallery();
+setMode(isAdmin, false);
 
 fileIn.onchange = function(){
   var f = fileIn.files[0]; if (!f) return;
   var fr = new FileReader();
   fr.onload = function(){
     try {
-      localStorage.setItem('fy_photo_' + currentPick, fr.result);
+      safeSetStorage('fy_photo_' + currentPick, fr.result);
       if (!DEFAULT_CONFIG.photos) DEFAULT_CONFIG.photos = {};
       DEFAULT_CONFIG.photos[currentPick] = fr.result;
     } catch(e) {
@@ -916,14 +935,14 @@ audioFileInput.onchange = function(){
 };
 
 /* ================= NÚT BẮN TIM TÍCH LŨY ================= */
-var heartCount = parseInt(localStorage.getItem('fy_hearts') || '0', 10);
+var heartCount = parseInt(safeGetStorage('fy_hearts') || '0', 10);
 var heartCountEl = document.getElementById('heartCount');
 heartCountEl.textContent = heartCount.toLocaleString('vi-VN');
 
 document.getElementById('sendHeartBtn').onclick = function(){
   heartCount++;
   heartCountEl.textContent = heartCount.toLocaleString('vi-VN');
-  localStorage.setItem('fy_hearts', heartCount);
+  safeSetStorage('fy_hearts', heartCount);
   spawnSparkles(this.getBoundingClientRect(), 16);
 };
 
@@ -974,8 +993,8 @@ cfgSaveBtn.onclick = function(){
   config.crushName = document.getElementById('cfgName').value.trim();
   config.startDate = document.getElementById('cfgDate').value || DEFAULT_CONFIG.startDate;
 
-  localStorage.setItem('fy_crushName', config.crushName);
-  localStorage.setItem('fy_startDate', config.startDate);
+  safeSetStorage('fy_crushName', config.crushName);
+  safeSetStorage('fy_startDate', config.startDate);
 
   applyConfig();
   updateTimer();
