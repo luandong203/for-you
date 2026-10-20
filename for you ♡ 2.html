@@ -122,6 +122,26 @@ h1{margin:6px 0 6px;font-size:clamp(30px,9vw,56px);line-height:1.1;font-weight:9
   display:grid;place-items:center;color:#f0abfc;font-size:14px;
 }
 .disc.playing{animation:spin 3s linear infinite}
+.volume-box{
+  display:flex;align-items:center;gap:6px;background:var(--win);
+  padding:3px 10px;border-radius:999px;border:1.5px solid var(--shadow);
+  box-shadow:0 2px 0 var(--shadow);
+}
+.vol-icon{font-size:13px;cursor:pointer;user-select:none;line-height:1}
+.vol-slider{
+  width:68px;height:6px;-webkit-appearance:none;appearance:none;
+  background:#e9d5ff;border-radius:999px;outline:none;cursor:pointer;
+  accent-color:var(--bar2);
+}
+.vol-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:13px;height:13px;
+  border-radius:50%;background:var(--bar2);border:1.5px solid var(--shadow);cursor:pointer;
+}
+.vol-slider::-moz-range-thumb{
+  width:13px;height:13px;border-radius:50%;background:var(--bar2);
+  border:1.5px solid var(--shadow);cursor:pointer;
+}
+
 .music-btns{display:flex;gap:8px;align-items:center}
 .btn-mini{
   padding:6px 14px;font-size:12px;border-radius:999px;border:2px solid var(--shadow);
@@ -345,6 +365,10 @@ body.is-admin .viewer-only { display: none !important; }
       </div>
     </div>
     <div class="music-btns">
+      <div class="volume-box" title="Âm lượng nhạc">
+        <span class="vol-icon" id="volIcon" role="button" aria-label="Tắt/Bật tiếng" tabindex="0">🔊</span>
+        <input type="range" class="vol-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.8" aria-label="Thanh chỉnh âm lượng">
+      </div>
       <button class="btn-mini" id="playMusicBtn">▶ Bật nhạc</button>
       <button class="btn-mini alt" id="customAudioBtn" title="Chọn file nhạc từ máy">Tải bài hát</button>
       <input type="file" id="audioFileInput" accept="audio/*" hidden>
@@ -356,7 +380,7 @@ body.is-admin .viewer-only { display: none !important; }
     <div class="bar"><span>Xin Chào</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
     <div class="body hero">
       <div class="star" id="secretStar" aria-hidden="true" title="✦ (Bấm 3 lần để mở/tắt Quản trị)">✦</div>
-      <h1 id="title">Chào Cậu,</h1>
+      <h1 id="title">Gửi Phương,</h1>
       <p class="sub" id="heroSub">Mình tạo một trang web nhỏ này vì thấy nhắn tin thôi là chưa đủ...</p>
     </div>
   </section>
@@ -387,12 +411,15 @@ body.is-admin .viewer-only { display: none !important; }
         <span style="font-size:12px;opacity:.8">(Chạm vào đây để mở phong bì)</span>
       </div>
       <div class="letter-card" id="letterContent">
-        <p style="margin-top:0"><strong>Gửi người tớ thích thầm,</strong></p>
+        <p style="margin-top:0"><strong>Gửi cậu người tớ thích rất nhiều,</strong></p>
         <p id="letterBody">
-          Có những ngày dù mệt mỏi đến đâu, chỉ cần nhìn thấy nụ cười của cậu hay một dòng tin nhắn ngắn ngủi cũng đủ khiến cả ngày của tớ bỗng chốc hóa dịu dàng.<br><br>
-          Cảm ơn vì cậu đã xuất hiện và khiến cuộc sống của tớ có thêm thật nhiều màu sắc rực rỡ. Tớ hy vọng hôm nay và nhiều ngày sau nữa, niềm vui sẽ luôn ở bên cạnh cậu.
+          Đối với tớ dù là có một ngày mệt mỏi đến đâu, thì chỉ cần nhìn thấy nụ cười của cậu hay một dòng tin nhắn của cậu cũng đủ khiến cả ngày của tớ bỗng chốc hóa dịu dàng.<br><br>
+Và khi tâm trạng có tệ, áp lực đến đâu thì hãy nhớ là mình vẫn luôn ở đây, nơi mà để có thể trút bầu tâm sự mỗi khi nặng lòng, tớ sẽ lắng nghe và ở bên cậu dù có ra sao.<br><br>
+Cảm ơn vì cậu đã xuất hiện và khiến cuộc sống của tớ có thêm thật nhiều màu sắc rực rỡ. Tớ hy vọng hôm nay và nhiều ngày sau nữa, niềm vui sẽ luôn ở bên cạnh cậu.
+
+
         </p>
-        <p style="text-align:right;margin-bottom:0"><em>— Người luôn dõi theo cậu ♡</em></p>
+        <p style="text-align:right;margin-bottom:0"><em>— Người sẽ luôn ở bên cậu ♡</em></p>
         <p style="text-align:center;margin:15px 0 0"><button class="btn-mini alt" id="closeLetterBtn">Gấp thư lại</button></p>
       </div>
     </div>
@@ -448,7 +475,7 @@ body.is-admin .viewer-only { display: none !important; }
     <div class="body">
       <div class="love-counter-box">
         <div style="font-size:14px;font-weight:700">Tổng số trái tim đã bắn về phía cậu:</div>
-        <div class="love-score" id="heartCount">0</div>
+        <div class="love-score" id="heartCount">999999</div>
         <button id="sendHeartBtn">Bắn tim cho cậu nè ♡</button>
       </div>
     </div>
@@ -623,7 +650,7 @@ function applyConfig(){
     document.getElementById('title').textContent = 'Gửi ' + config.crushName + ' ♡';
     document.title = 'Dành Riêng Cho ' + config.crushName + ' ♡';
   } else {
-    document.getElementById('title').textContent = 'Chào Cậu,';
+    document.getElementById('title').textContent = 'Gửi Phương,';
     document.title = 'Dành Riêng Cho Cậu ♡';
   }
 }
@@ -839,7 +866,7 @@ document.getElementById('modalChangeBtn').onclick = function(){ fileIn.value = '
 imgModal.onclick = function(e){ if (e.target === imgModal) imgModal.classList.remove('active'); };
 
 /* ================= MÁY PHÁT NHẠC (LOFI SYNTHESIZER & TẢI NHẠC) ================= */
-var audioCtx = null, isPlaying = false, audioInterval = null;
+var audioCtx = null, masterGain = null, isPlaying = false, audioInterval = null;
 var customAudio = null;
 var playBtn = document.getElementById('playMusicBtn');
 var disc = document.getElementById('musicDisc');
@@ -847,6 +874,63 @@ var musicStatus = document.getElementById('musicStatus');
 var musicTitle = document.getElementById('musicTitle');
 var customAudioBtn = document.getElementById('customAudioBtn');
 var audioFileInput = document.getElementById('audioFileInput');
+var volumeSlider = document.getElementById('volumeSlider');
+var volIcon = document.getElementById('volIcon');
+
+var savedVol = parseFloat(safeGetStorage('fy_music_volume'));
+var currentVolume = (!isNaN(savedVol) && savedVol >= 0 && savedVol <= 1) ? savedVol : 0.8;
+var prevVolume = currentVolume > 0 ? currentVolume : 0.8;
+
+function updateVolIcon(vol){
+  if (!volIcon) return;
+  if (vol <= 0) volIcon.textContent = '🔇';
+  else if (vol < 0.5) volIcon.textContent = '🔉';
+  else volIcon.textContent = '🔊';
+}
+
+function getMasterGain(){
+  if (!audioCtx) return null;
+  if (!masterGain){
+    masterGain = audioCtx.createGain();
+    masterGain.gain.setValueAtTime(currentVolume, audioCtx.currentTime);
+    masterGain.connect(audioCtx.destination);
+  }
+  return masterGain;
+}
+
+function setVolume(val, save){
+  currentVolume = Math.max(0, Math.min(1, parseFloat(val)));
+  if (volumeSlider) volumeSlider.value = currentVolume;
+  if (save) safeSetStorage('fy_music_volume', currentVolume);
+  
+  if (audioCtx && masterGain){
+    masterGain.gain.setValueAtTime(currentVolume, audioCtx.currentTime);
+  }
+  if (customAudio){
+    customAudio.volume = currentVolume;
+  }
+  updateVolIcon(currentVolume);
+}
+
+if (volumeSlider){
+  volumeSlider.value = currentVolume;
+  volumeSlider.oninput = function(){
+    setVolume(this.value, true);
+    if (currentVolume > 0) prevVolume = currentVolume;
+  };
+}
+
+if (volIcon){
+  volIcon.onclick = function(){
+    if (currentVolume > 0){
+      prevVolume = currentVolume;
+      setVolume(0, true);
+    } else {
+      setVolume(prevVolume > 0 ? prevVolume : 0.8, true);
+    }
+  };
+}
+updateVolIcon(currentVolume);
 
 var CHORDS = [
   [261.63, 329.63, 392.00, 493.88], // Cmaj7
@@ -870,7 +954,8 @@ function playLofiChord(chord){
     gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 2.8);
 
     osc.connect(gain);
-    gain.connect(audioCtx.destination);
+    var targetDest = getMasterGain() || audioCtx.destination;
+    gain.connect(targetDest);
     osc.start(now + idx * 0.08);
     osc.stop(now + idx * 0.08 + 3.0);
   });
@@ -879,6 +964,7 @@ function playLofiChord(chord){
 function startLofiSynth(){
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   if (audioCtx.state === 'suspended') audioCtx.resume();
+  getMasterGain();
   isPlaying = true;
   disc.classList.add('playing');
   playBtn.textContent = '⏸ Tạm dừng';
@@ -903,6 +989,7 @@ function stopLofiSynth(){
 playBtn.onclick = function(){
   if (customAudio && customAudio.src){
     if (customAudio.paused){
+      customAudio.volume = currentVolume;
       customAudio.play();
       isPlaying = true;
       disc.classList.add('playing');
@@ -924,6 +1011,7 @@ audioFileInput.onchange = function(){
   if (!file) return;
   stopLofiSynth();
   if (!customAudio) customAudio = new Audio();
+  customAudio.volume = currentVolume;
   customAudio.src = URL.createObjectURL(file);
   customAudio.loop = true;
   musicTitle.textContent = file.name.replace(/\.[^/.]+$/, "");
