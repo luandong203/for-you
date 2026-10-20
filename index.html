@@ -280,6 +280,37 @@ button, .pol, .letter-seal, .disc{
   .time-lbl{font-size:8px}
 }
 
+/* Phân tách giao diện Admin và Người xem */
+body.is-viewer .admin-only { display: none !important; }
+body.is-admin .viewer-only { display: none !important; }
+
+/* Banner Admin trên cùng */
+.admin-badge-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: linear-gradient(90deg, #7c1fe0, #b45cff); color: #fff;
+  padding: 8px 14px; border-radius: 12px; border: 2px solid var(--shadow);
+  font-size: 13px; font-weight: 800; margin-bottom: 14px; box-shadow: 0 4px 0 var(--shadow);
+  flex-wrap: wrap;
+}
+
+/* Toast thông báo chế độ */
+.mode-toast {
+  position: fixed; top: 20px; left: 50%;
+  transform: translateX(-50%) translateY(-40px);
+  background: var(--win); color: var(--ink);
+  border: 2.5px solid var(--shadow); box-shadow: 0 5px 0 var(--shadow);
+  border-radius: 999px; padding: 8px 20px; font-size: 14px; font-weight: 800;
+  z-index: 999; opacity: 0; pointer-events: none;
+  transition: all .3s cubic-bezier(.175,.885,.32,1.275);
+}
+.mode-toast.show {
+  transform: translateX(-50%) translateY(0); opacity: 1;
+}
+
+.star {
+  cursor: pointer; user-select: none;
+}
+
 @media (prefers-reduced-motion:reduce){
   .marq span,.star,.disc.playing{animation:none}
   .marq span{padding-left:0}
@@ -288,8 +319,19 @@ button, .pol, .letter-seal, .disc{
 }
 </style>
 </head>
-<body>
+<body class="is-viewer">
+<div class="mode-toast" id="modeToast"></div>
+
 <div class="wrap">
+
+  <!-- Admin Banner (chỉ hiện khi ở chế độ Admin) -->
+  <div class="admin-badge-bar admin-only">
+    <span>👑 Chế Độ Quản Trị Viên (Chỉ Bạn Thấy)</span>
+    <div style="display:flex;gap:6px">
+      <button type="button" class="btn-mini alt" id="previewViewerBtn">👀 Xem Thử Người Xem</button>
+      <button type="button" class="btn-mini" id="openSettingsTopBtn">⚙️ Cài Đặt</button>
+    </div>
+  </div>
 
   <div class="marq" aria-hidden="true"><span>♡ Tạo Riêng Cho Cậu ♡ Nhớ Mỉm Cười Khi Xem Nha ♡ Đang Nạp Yêu Thương... 100% ♡ Dành Riêng Cho Cậu ♡</span></div>
 
@@ -313,7 +355,7 @@ button, .pol, .letter-seal, .disc{
   <section class="win">
     <div class="bar"><span>Xin Chào</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
     <div class="body hero">
-      <div class="star" aria-hidden="true">✦</div>
+      <div class="star" id="secretStar" aria-hidden="true" title="✦ (Bấm 3 lần để mở/tắt Quản trị)">✦</div>
       <h1 id="title">Chào Cậu,</h1>
       <p class="sub" id="heroSub">Mình tạo một trang web nhỏ này vì thấy nhắn tin thôi là chưa đủ...</p>
     </div>
@@ -383,7 +425,8 @@ button, .pol, .letter-seal, .disc{
     <div class="bar"><span>Khoảnh Khắc Kỷ Niệm</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
     <div class="body">
       <div class="gal" id="gal"></div>
-      <p class="hint">Chạm vào khung ảnh để thay ảnh mới • ảnh sẽ tự động được lưu lại trên máy ♡</p>
+      <p class="hint viewer-only" id="galHintViewer">Chạm vào từng khung ảnh để ngắm nhìn kỷ niệm nhé ♡</p>
+      <p class="hint admin-only" id="galHintAdmin">Chạm vào khung ảnh để thêm/thay ảnh mới • Bấm 'xóa' để bỏ ảnh</p>
       <input type="file" accept="image/*" id="file" hidden>
     </div>
   </section>
@@ -420,7 +463,7 @@ button, .pol, .letter-seal, .disc{
     <img id="modalImg" src="" alt="Ảnh kỷ niệm">
     <p id="modalCap" style="font-weight:700;margin:10px 0"></p>
     <div style="display:flex;justify-content:center;gap:10px">
-      <button class="btn-mini" id="modalChangeBtn">Đổi ảnh này</button>
+      <button class="btn-mini admin-only" id="modalChangeBtn">Đổi ảnh này</button>
       <button class="btn-mini alt" id="modalCloseBtn">Đóng</button>
     </div>
   </div>
@@ -429,27 +472,105 @@ button, .pol, .letter-seal, .disc{
 <!-- Modal tùy chỉnh nhanh (Settings) -->
 <div class="modal" id="cfgModal" role="dialog" aria-modal="true" aria-label="Tùy chỉnh trang web">
   <div class="modal-content" style="text-align:left">
-    <h3 style="margin-top:0;font-family:'Nunito',sans-serif;font-weight:900;color:var(--bar2)">⚙️ Tùy chỉnh trang web</h3>
+    <h3 style="margin-top:0;font-family:'Nunito',sans-serif;font-weight:900;color:var(--bar2)">⚙️ Bảng Quản Trị Trang Web</h3>
+    
     <label style="display:block;font-size:13px;font-weight:700;margin:8px 0 3px">Tên người ấy (Crush):</label>
     <input type="text" id="cfgName" style="width:100%;padding:9px;border-radius:6px;border:2px solid var(--shadow);font-family:inherit;font-size:16px" placeholder="Ví dụ: Linh, Em bé, v.v...">
     
     <label style="display:block;font-size:13px;font-weight:700;margin:12px 0 3px">Ngày bắt đầu thích / quen nhau:</label>
     <input type="date" id="cfgDate" style="width:100%;padding:9px;border-radius:6px;border:2px solid var(--shadow);font-family:inherit;font-size:16px">
 
-    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px">
-      <button class="btn-mini alt" id="cfgCancelBtn">Hủy</button>
-      <button class="btn-mini" id="cfgSaveBtn">Lưu lại ♡</button>
+    <div style="margin-top:14px;padding:12px;background:var(--bg);border-radius:8px;border:1.5px dashed var(--shadow)">
+      <div style="font-size:12px;font-weight:800;color:var(--bar2);margin-bottom:6px">🔗 CHIA SẺ CHO NGƯỜI ẤY:</div>
+      <button type="button" class="btn-mini" id="copyViewerLinkBtn" style="width:100%;margin-bottom:8px">📋 Sao chép Link Người Xem</button>
+      <button type="button" class="btn-mini alt" id="exportHtmlBtn" style="width:100%">💾 Tải File index.html Đóng Gói (Đã nhúng ảnh)</button>
+      <div style="font-size:11px;opacity:.8;margin-top:6px;line-height:1.35">Mẹo: Tải file index.html này rồi thay vào thư mục dự án trên GitHub / Vercel là người ấy mở máy nào cũng xem được đầy đủ ảnh và tên mà không cần cấu hình gì nữa!</div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:8px;flex-wrap:wrap">
+      <button class="btn-mini alt" id="switchToViewerModalBtn" style="font-size:11.5px">👀 Xem trước như Khách</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn-mini alt" id="cfgCancelBtn">Đóng</button>
+        <button class="btn-mini" id="cfgSaveBtn">Lưu lại ♡</button>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- Fixed controls -->
 <div class="fixed-tools">
-  <button class="theme alt" id="cfgOpenBtn" title="Chỉnh sửa thông tin">⚙️ Tùy chỉnh</button>
+  <button class="theme alt admin-only" id="cfgOpenBtn" title="Chỉnh sửa thông tin">⚙️ Quản trị</button>
   <button class="theme alt" id="theme" aria-label="Chuyển chế độ sáng và tối">☀️ / 🌙</button>
 </div>
 
 <script>
+/* ================= PHÂN QUYỀN ADMIN & NGƯỜI XEM (KHÔNG CẦN LOGIN) ================= */
+var modeToast = document.getElementById('modeToast');
+var toastTimer = null;
+function showToast(msg){
+  if (!modeToast) return;
+  modeToast.textContent = msg;
+  modeToast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){
+    modeToast.classList.remove('show');
+  }, 2600);
+}
+
+function checkIsAdminUrl(){
+  var params = new URLSearchParams(window.location.search);
+  if (params.has('admin') || params.get('mode') === 'admin') return true;
+  if (window.location.hash.toLowerCase() === '#admin') return true;
+  return false;
+}
+
+var isAdmin = false;
+var savedMode = sessionStorage.getItem('fy_mode');
+if (savedMode === 'admin'){
+  isAdmin = true;
+} else if (savedMode === 'viewer'){
+  isAdmin = false;
+} else {
+  isAdmin = checkIsAdminUrl();
+}
+
+function setMode(adminState, showFeedback){
+  isAdmin = !!adminState;
+  if (isAdmin){
+    document.body.classList.remove('is-viewer');
+    document.body.classList.add('is-admin');
+    sessionStorage.setItem('fy_mode', 'admin');
+    if (showFeedback) showToast('👑 Chế độ Quản Trị Viên (Đã bật chỉnh sửa)');
+  } else {
+    document.body.classList.remove('is-admin');
+    document.body.classList.add('is-viewer');
+    sessionStorage.setItem('fy_mode', 'viewer');
+    if (showFeedback) showToast('✨ Chế độ Người Xem (Giao diện trong lành)');
+  }
+  if (typeof renderGallery === 'function') renderGallery();
+}
+
+// Chạm / click 3 lần nhanh vào ngôi sao ✦ để bật/tắt quyền Quản trị bí mật
+var starClickCount = 0;
+var starClickTimer = null;
+var secretStar = document.getElementById('secretStar');
+if (secretStar){
+  secretStar.onclick = function(){
+    starClickCount++;
+    clearTimeout(starClickTimer);
+    starClickTimer = setTimeout(function(){ starClickCount = 0; }, 1200);
+    if (starClickCount >= 3){
+      starClickCount = 0;
+      setMode(!isAdmin, true);
+    }
+  };
+}
+
+var previewViewerBtn = document.getElementById('previewViewerBtn');
+if (previewViewerBtn){
+  previewViewerBtn.onclick = function(){ setMode(false, true); };
+}
+
 /* ================= CẤU HÌNH MẶC ĐỊNH ================= */
 function getTwoMonthsAgoStr(){
   var d = new Date();
@@ -461,9 +582,10 @@ function getTwoMonthsAgoStr(){
 }
 
 var DEFAULT_CONFIG = {
-  crushName: "",                     // Ví dụ: "Linh" — để trống sẽ hiển thị "Chào Cậu,"
-  startDate: getTwoMonthsAgoStr(),   // Mặc định cách đây đúng 2 tháng
-  caps: ['Khoảnh Khắc 1', 'Khoảnh Khắc 2', 'Khoảnh Khắc 3', 'Khoảnh Khắc 4', 'Khoảnh Khắc 5', 'Khoảnh Khắc 6']
+  crushName: "",
+  startDate: getTwoMonthsAgoStr(),
+  caps: ['Khoảnh Khắc 1', 'Khoảnh Khắc 2', 'Khoảnh Khắc 3', 'Khoảnh Khắc 4', 'Khoảnh Khắc 5', 'Khoảnh Khắc 6'],
+  photos: {}
 };
 
 var savedStart = localStorage.getItem('fy_startDate');
@@ -480,7 +602,7 @@ var config = {
 };
 
 function applyConfig(){
-  if (config.crushName.trim()){
+  if (config.crushName && config.crushName.trim()){
     document.getElementById('title').textContent = 'Gửi ' + config.crushName + ' ♡';
     document.title = 'Dành Riêng Cho ' + config.crushName + ' ♡';
   } else {
@@ -489,6 +611,7 @@ function applyConfig(){
   }
 }
 applyConfig();
+setMode(isAdmin, false);
 
 /* ================= LỜI CHÚC TỰ GÕ ================= */
 var WISHES = [
@@ -615,7 +738,7 @@ var modalImg = document.getElementById('modalImg');
 var modalCap = document.getElementById('modalCap');
 
 function getSavedPhoto(i){
-  return localStorage.getItem('fy_photo_' + i);
+  return localStorage.getItem('fy_photo_' + i) || (DEFAULT_CONFIG.photos && DEFAULT_CONFIG.photos[i]) || '';
 }
 
 function renderGallery(){
@@ -631,9 +754,13 @@ function renderGallery(){
       ? '<img src="' + savedSrc + '" alt="' + cap + '">' 
       : '<span aria-hidden="true">✦</span>';
 
+    var removeBtnHtml = (savedSrc && isAdmin) 
+      ? '<div class="pol-actions admin-only"><button type="button" class="pol-btn remove-btn" data-idx="' + i + '">xóa</button></div>' 
+      : '';
+
     d.innerHTML = '<div class="ph" id="ph' + i + '">' + innerPhoto + '</div>' +
                   '<p>' + cap + '</p>' +
-                  (savedSrc ? '<div class="pol-actions"><button type="button" class="pol-btn remove-btn" data-idx="' + i + '">xóa</button></div>' : '');
+                  removeBtnHtml;
 
     d.onclick = function(e){
       if (e.target.classList.contains('remove-btn')) return;
@@ -644,7 +771,11 @@ function renderGallery(){
         modalCap.textContent = cap;
         imgModal.classList.add('active');
       } else {
-        fileIn.value = ''; fileIn.click();
+        if (isAdmin){
+          fileIn.value = ''; fileIn.click();
+        } else {
+          showToast('Khung ảnh này đang lưu giữ kỷ niệm ngọt ngào ♡');
+        }
       }
     };
     gal.appendChild(d);
@@ -656,7 +787,11 @@ function renderGallery(){
       e.stopPropagation();
       var idx = this.getAttribute('data-idx');
       localStorage.removeItem('fy_photo_' + idx);
+      if (DEFAULT_CONFIG.photos && DEFAULT_CONFIG.photos[idx]){
+        delete DEFAULT_CONFIG.photos[idx];
+      }
       renderGallery();
+      showToast('Đã xóa ảnh số ' + (parseInt(idx)+1));
     };
   });
 }
@@ -668,11 +803,14 @@ fileIn.onchange = function(){
   fr.onload = function(){
     try {
       localStorage.setItem('fy_photo_' + currentPick, fr.result);
+      if (!DEFAULT_CONFIG.photos) DEFAULT_CONFIG.photos = {};
+      DEFAULT_CONFIG.photos[currentPick] = fr.result;
     } catch(e) {
-      alert('Ảnh có dung lượng lớn, hãy thử chọn ảnh nhẹ hơn nhé!');
+      alert('Ảnh có dung lượng hơi lớn, hãy thử chọn ảnh nhẹ hơn nhé!');
     }
     renderGallery();
     imgModal.classList.remove('active');
+    showToast('Đã lưu ảnh kỷ niệm ♡');
   };
   fr.readAsDataURL(f);
 };
@@ -814,15 +952,22 @@ document.getElementById('start').onclick = function(){
 /* ================= MODAL CÀI ĐẶT / TÙY CHỈNH ================= */
 var cfgModal = document.getElementById('cfgModal');
 var cfgOpenBtn = document.getElementById('cfgOpenBtn');
+var openSettingsTopBtn = document.getElementById('openSettingsTopBtn');
 var cfgCancelBtn = document.getElementById('cfgCancelBtn');
 var cfgSaveBtn = document.getElementById('cfgSaveBtn');
+var copyViewerLinkBtn = document.getElementById('copyViewerLinkBtn');
+var exportHtmlBtn = document.getElementById('exportHtmlBtn');
+var switchToViewerModalBtn = document.getElementById('switchToViewerModalBtn');
 
-cfgOpenBtn.onclick = function(){
-  document.getElementById('cfgName').value = config.crushName;
-  document.getElementById('cfgDate').value = config.startDate;
+function openCfgModal(){
+  document.getElementById('cfgName').value = config.crushName || '';
+  document.getElementById('cfgDate').value = config.startDate || DEFAULT_CONFIG.startDate;
   cfgModal.classList.add('active');
-};
-cfgCancelBtn.onclick = function(){ cfgModal.classList.remove('active'); };
+}
+
+if (cfgOpenBtn) cfgOpenBtn.onclick = openCfgModal;
+if (openSettingsTopBtn) openSettingsTopBtn.onclick = openCfgModal;
+if (cfgCancelBtn) cfgCancelBtn.onclick = function(){ cfgModal.classList.remove('active'); };
 cfgModal.onclick = function(e){ if (e.target === cfgModal) cfgModal.classList.remove('active'); };
 
 cfgSaveBtn.onclick = function(){
@@ -835,6 +980,61 @@ cfgSaveBtn.onclick = function(){
   applyConfig();
   updateTimer();
   cfgModal.classList.remove('active');
+  showToast('Đã lưu thông tin ♡');
+};
+
+if (copyViewerLinkBtn){
+  copyViewerLinkBtn.onclick = function(){
+    var url = window.location.origin + window.location.pathname;
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(function(){
+        showToast('📋 Đã sao chép link người xem thành công!');
+      }).catch(function(){
+        prompt('Sao chép link người xem bên dưới:', url);
+      });
+    } else {
+      prompt('Sao chép link người xem bên dưới:', url);
+    }
+  };
+}
+
+if (exportHtmlBtn){
+  exportHtmlBtn.onclick = function(){
+    var photosMap = {};
+    for (var i = 0; i < config.caps.length; i++){
+      var p = getSavedPhoto(i);
+      if (p) photosMap[i] = p;
+    }
+    var exportConfig = {
+      crushName: config.crushName,
+      startDate: config.startDate,
+      caps: config.caps,
+      photos: photosMap
+    };
+
+    var currentHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    currentHtml = currentHtml.replace(/<body[^>]*class=["'][^"']*["']/i, '<body class="is-viewer"');
+
+    var regex = /var DEFAULT_CONFIG\s*=\s*\{[\s\S]*?\};/;
+    var newConfigCode = 'var DEFAULT_CONFIG = ' + JSON.stringify(exportConfig, null, 2) + ';';
+    var finalHtml = currentHtml.replace(regex, newConfigCode);
+
+    var blob = new Blob([finalHtml], { type: 'text/html;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'index.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    showToast('💾 Đã tải về file index.html đóng gói thành công!');
+  };
+}
+
+if (switchToViewerModalBtn){
+  switchToViewerModalBtn.onclick = function(){
+    cfgModal.classList.remove('active');
+    setMode(false, true);
+  };
 };
 
 /* ================= CHUYỂN ĐỔI CHẾ ĐỘ SÁNG / TỐI ================= */
