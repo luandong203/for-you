@@ -451,18 +451,18 @@ button, .pol, .letter-seal, .disc{
 
 <script>
 /* ================= CẤU HÌNH MẶC ĐỊNH ================= */
-function getTwoMonthsAgoStr(){
+/*function getTwoMonthsAgoStr(){
   var d = new Date();
   d.setMonth(d.getMonth() - 2);
   var y = d.getFullYear();
   var m = ('0' + (d.getMonth() + 1)).slice(-2);
   var day = ('0' + d.getDate()).slice(-2);
   return y + '-' + m + '-' + day;
-}
+}*/
 
 var DEFAULT_CONFIG = {
   crushName: "",                     // Ví dụ: "Linh" — để trống sẽ hiển thị "Chào Cậu,"
-  startDate: getTwoMonthsAgoStr(),   // Mặc định cách đây đúng 2 tháng
+  startDate: '',   // Mặc định cách đây đúng 2 tháng
   caps: ['Khoảnh Khắc 1', 'Khoảnh Khắc 2', 'Khoảnh Khắc 3', 'Khoảnh Khắc 4', 'Khoảnh Khắc 5', 'Khoảnh Khắc 6']
 };
 
