@@ -380,7 +380,7 @@ body.is-admin .viewer-only { display: none !important; }
     <div class="bar"><span>Xin Chào</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
     <div class="body hero">
       <div class="star" id="secretStar" aria-hidden="true" title="✦ (Bấm 3 lần để mở/tắt Quản trị)">✦</div>
-      <h1 id="title">Chào Cậu,</h1>
+      <h1 id="title">Gửi Phương,</h1>
       <p class="sub" id="heroSub">Mình tạo một trang web nhỏ này vì thấy nhắn tin thôi là chưa đủ...</p>
     </div>
   </section>
@@ -411,12 +411,15 @@ body.is-admin .viewer-only { display: none !important; }
         <span style="font-size:12px;opacity:.8">(Chạm vào đây để mở phong bì)</span>
       </div>
       <div class="letter-card" id="letterContent">
-        <p style="margin-top:0"><strong>Gửi người tớ thích thầm,</strong></p>
+        <p style="margin-top:0"><strong>Gửi cậu người tớ thích rất nhiều,</strong></p>
         <p id="letterBody">
-          Có những ngày dù mệt mỏi đến đâu, chỉ cần nhìn thấy nụ cười của cậu hay một dòng tin nhắn ngắn ngủi cũng đủ khiến cả ngày của tớ bỗng chốc hóa dịu dàng.<br><br>
-          Cảm ơn vì cậu đã xuất hiện và khiến cuộc sống của tớ có thêm thật nhiều màu sắc rực rỡ. Tớ hy vọng hôm nay và nhiều ngày sau nữa, niềm vui sẽ luôn ở bên cạnh cậu.
+          Đối với tớ dù là có một ngày mệt mỏi đến đâu, thì chỉ cần nhìn thấy nụ cười của cậu hay một dòng tin nhắn của cậu cũng đủ khiến cả ngày của tớ bỗng chốc hóa dịu dàng.<br><br>
+Và khi tâm trạng có tệ, áp lực đến đâu thì hãy nhớ là mình vẫn luôn ở đây, nơi mà để có thể trút bầu tâm sự mỗi khi nặng lòng, tớ sẽ lắng nghe và ở bên cậu dù có ra sao.<br><br>
+Cảm ơn vì cậu đã xuất hiện và khiến cuộc sống của tớ có thêm thật nhiều màu sắc rực rỡ. Tớ hy vọng hôm nay và nhiều ngày sau nữa, niềm vui sẽ luôn ở bên cạnh cậu.
+
+
         </p>
-        <p style="text-align:right;margin-bottom:0"><em>— Người luôn dõi theo cậu ♡</em></p>
+        <p style="text-align:right;margin-bottom:0"><em>— Người sẽ luôn ở bên cậu ♡</em></p>
         <p style="text-align:center;margin:15px 0 0"><button class="btn-mini alt" id="closeLetterBtn">Gấp thư lại</button></p>
       </div>
     </div>
@@ -472,7 +475,7 @@ body.is-admin .viewer-only { display: none !important; }
     <div class="body">
       <div class="love-counter-box">
         <div style="font-size:14px;font-weight:700">Tổng số trái tim đã bắn về phía cậu:</div>
-        <div class="love-score" id="heartCount">0</div>
+        <div class="love-score" id="heartCount">999999</div>
         <button id="sendHeartBtn">Bắn tim cho cậu nè ♡</button>
       </div>
     </div>
@@ -647,7 +650,7 @@ function applyConfig(){
     document.getElementById('title').textContent = 'Gửi ' + config.crushName + ' ♡';
     document.title = 'Dành Riêng Cho ' + config.crushName + ' ♡';
   } else {
-    document.getElementById('title').textContent = 'Chào Cậu,';
+    document.getElementById('title').textContent = 'Gửi Phương,';
     document.title = 'Dành Riêng Cho Cậu ♡';
   }
 }
