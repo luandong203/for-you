@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dành Riêng Cho Cậu ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#fbf6ff; --bg2:#f3e5ff; --bg3:#e7d2ff;
+  --ink:#32115e; --win:#ffffff; --bar1:#c48eff; --bar2:#9d5cf7;
+  --pink:#f8d6ff; --chrome:#fbf7ff; --shadow:#5a2399;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg1:#7041a6; --bg2:#55288a; --bg3:#3c1869;
+    --ink:#ffffff; --win:#4e2280; --bar1:#b77aff; --bar2:#7c3aed;
+    --pink:#f5d0fe; --chrome:#5f2e99; --shadow:#220942; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg1:#7041a6; --bg2:#55288a; --bg3:#3c1869;
+  --ink:#ffffff; --win:#4e2280; --bar1:#b77aff; --bar2:#7c3aed;
+  --pink:#f5d0fe; --chrome:#5f2e99; --shadow:#220942; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0; min-height:100vh; color:var(--ink);
+  font-family:'Nunito',system-ui,-apple-system,sans-serif; font-weight:600; line-height:1.6;
+  background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 50%, var(--bg3) 100%);
+  background-attachment:fixed;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* Hiệu ứng lấp lánh (blink nhẹ) cho hình nền */
+body::before, body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+body::before{
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,0.95) 0, rgba(255,255,255,0.95) 1.5px, transparent 3px) 0 0/110px 110px,
+    radial-gradient(circle at 72% 38%, rgba(255,255,255,0.9) 0, rgba(255,255,255,0.9) 2px, transparent 4px) 0 0/170px 170px,
+    radial-gradient(circle at 40% 75%, rgba(255,255,255,0.85) 0, rgba(255,255,255,0.85) 1.5px, transparent 3px) 0 0/130px 130px;
+  animation: bgBlink 3.6s ease-in-out infinite alternate;
+}
+body::after{
+  background:
+    radial-gradient(circle at 85% 18%, rgba(255,255,255,0.95) 0, rgba(255,255,255,0.95) 2px, transparent 3.5px) 0 0/150px 150px,
+    radial-gradient(circle at 28% 62%, rgba(255,255,255,0.9) 0, rgba(255,255,255,0.9) 2.5px, transparent 4px) 0 0/190px 190px,
+    radial-gradient(circle at 62% 88%, rgba(255,255,255,0.8) 0, rgba(255,255,255,0.8) 1.5px, transparent 3px) 0 0/120px 120px;
+  animation: bgBlink 5.2s ease-in-out infinite alternate;
+  animation-delay: -2.6s;
+}
+
+@keyframes bgBlink{
+  0%{
+    opacity: 0.25;
+    filter: drop-shadow(0 0 1px rgba(255,255,255,0.4));
+    transform: scale(0.99);
+  }
+  50%{
+    opacity: 0.7;
+    filter: drop-shadow(0 0 3px rgba(255,255,255,0.85));
+  }
+  100%{
+    opacity: 1;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,1));
+    transform: scale(1.01);
+  }
+}
+
+h1,h2,.bar{font-family:'Nunito',system-ui,sans-serif;font-weight:900}
+.wrap{max-width:740px;margin:0 auto;padding:18px 14px 80px;position:relative;z-index:1}
+
+/* marquee */
+.marq{overflow:hidden;white-space:nowrap;border:2px solid var(--shadow);border-radius:999px;
+  background:linear-gradient(#fff8,#fff2),var(--bar1);color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;padding:7px 0;margin-bottom:18px;box-shadow:0 4px 0 var(--shadow)}
+.marq span{display:inline-block;padding-left:100%;animation:scroll 20s linear infinite}
+@keyframes scroll{to{transform:translateX(-100%)}}
+
+/* windows */
+.win{background:var(--win);border:3px solid var(--shadow);border-radius:14px;box-shadow:6px 6px 0 var(--shadow);margin:0 0 22px;overflow:hidden}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;color:#fff;font-size:12px;letter-spacing:.06em;
+  background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0) 55%),linear-gradient(90deg,var(--bar1),var(--bar2))}
+.dots{display:flex;gap:6px}
+.dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--shadow);background:var(--chrome);display:block}
+.dots i:nth-child(1){background:#ff85a1}
+.dots i:nth-child(2){background:#ffd166}
+.dots i:nth-child(3){background:#06d6a0}
+.body{padding:20px}
+
+/* hero */
+.hero{text-align:center}
+h1{margin:6px 0 6px;font-size:clamp(30px,9vw,56px);line-height:1.1;font-weight:900;
+  background:linear-gradient(180deg,#fff 0%,#e9d5ff 35%,#a855f7 50%,#f0abfc 52%,#7e22ce 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-text-stroke:2px var(--shadow);paint-order:stroke fill;filter:drop-shadow(3px 3px 0 var(--shadow))}
+.sub{font-size:17px;margin:8px 0 0;font-weight:600}
+.star{display:inline-block;animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* music player toolbar */
+.music-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--chrome);border:2px solid var(--shadow);border-radius:12px;
+  padding:10px 14px;margin-bottom:18px;box-shadow:3px 3px 0 var(--shadow);flex-wrap:wrap;
+}
+.music-info{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
+.disc{
+  width:32px;height:32px;border-radius:50%;background:#1e0a3c;border:2px solid var(--shadow);
+  display:grid;place-items:center;color:#f0abfc;font-size:14px;
+}
+.disc.playing{animation:spin 3s linear infinite}
+.music-btns{display:flex;gap:8px;align-items:center}
+.btn-mini{
+  padding:6px 14px;font-size:12px;border-radius:999px;border:2px solid var(--shadow);
+  box-shadow:0 3px 0 var(--shadow);cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;
+}
+
+/* timer count */
+.timer-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:6px;text-align:center;margin:12px 0 6px;
+}
+.time-box{
+  background:var(--chrome);border:2px solid var(--shadow);border-radius:10px;
+  padding:8px 2px;box-shadow:3px 3px 0 var(--shadow);
+}
+.time-num{font-family:'Nunito',sans-serif;font-size:clamp(16px,4.5vw,26px);font-weight:900;color:var(--bar2);line-height:1}
+:root[data-theme="dark"] .time-num{color:#f5d0fe}
+.time-lbl{font-size:11px;font-weight:700;opacity:.85;margin-top:4px;text-transform:uppercase}
+
+/* list */
+ul.notes{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ul.notes li{padding:12px 16px;border:2px dashed var(--bar1);border-radius:10px;background:var(--chrome);font-size:15px;font-weight:600}
+ul.notes li::before{content:"★ ";color:var(--bar1);display:inline-block}
+ul.notes li{position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}
+ul.notes li:hover{transform:translate(-3px,-4px) rotate(-.6deg);box-shadow:4px 5px 0 var(--shadow);border-style:solid;border-color:var(--shadow)}
+ul.notes li:hover::before{animation:spin 1s linear infinite}
+ul.notes li::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);transform:translateX(-100%)}
+ul.notes li:hover::after,ul.notes li.idle::after{animation:sweep .9s ease-out}
+ul.notes li.idle{animation:hop .8s ease-out}
+@keyframes sweep{to{transform:translateX(100%)}}
+@keyframes hop{30%{transform:translateY(-6px)}60%{transform:translateY(0)}80%{transform:translateY(-2px)}}
+@media (prefers-reduced-motion:reduce){ul.notes li{transition:none}ul.notes li.idle,ul.notes li::after,ul.notes li:hover::before{animation:none}}
+
+/* loader */
+.prog{height:26px;border:3px solid var(--shadow);border-radius:8px;background:var(--chrome);overflow:hidden;margin:12px 0}
+.prog b{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,var(--bar1) 0 14px,var(--pink) 14px 18px);transition:width .15s}
+#pct{font-family:'Nunito',sans-serif;font-weight:800}
+
+/* buttons */
+button{font:inherit;font-family:'Nunito',sans-serif;font-weight:800;cursor:pointer;color:#fff;
+  padding:12px 24px;border:3px solid var(--shadow);border-radius:999px;font-size:15px;
+  background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,0) 50%),linear-gradient(var(--bar1),var(--bar2));
+  box-shadow:0 5px 0 var(--shadow);transition:transform .08s,box-shadow .08s}
+button:active{transform:translateY(4px);box-shadow:0 1px 0 var(--shadow)}
+button:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+button.alt{background:linear-gradient(180deg,#fff8,#fff0 50%),var(--chrome);color:var(--ink)}
+
+.term{min-height:105px;padding:14px;border:3px solid var(--shadow);border-radius:10px;background:#1e0a3c;color:#f0abfc;font-size:17px;font-weight:700;display:flex;align-items:center}
+.cur{display:inline-block;width:10px;height:1.1em;background:#f0abfc;margin-left:4px;vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.center{text-align:center;margin:16px 0 0}
+
+/* letter box */
+.letter-card{
+  background:#fff;color:#2e1065;border:3px solid var(--shadow);border-radius:12px;
+  padding:20px;box-shadow:5px 5px 0 var(--shadow);margin-top:14px;display:none;
+  animation:fadeDown .4s ease-out;line-height:1.7;font-size:15px;
+}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.letter-seal{
+  text-align:center;cursor:pointer;padding:14px;background:var(--chrome);
+  border:2px dashed var(--bar1);border-radius:12px;font-weight:700;transition:transform .15s;
+}
+.letter-seal:hover{transform:scale(1.02)}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:18px}
+.pol{background:#fff;padding:8px 8px 10px;border:2px solid var(--shadow);border-radius:8px;box-shadow:4px 4px 0 var(--shadow);transform:rotate(var(--r));transition:transform .2s;cursor:pointer;text-align:center;color:#2e1065;font-size:13px;font-weight:700;position:relative}
+.pol:hover,.pol:focus-visible{transform:rotate(0) scale(1.06);outline:none;z-index:3}
+.pol:focus-visible{box-shadow:0 0 0 3px var(--pink),4px 4px 0 var(--shadow)}
+.ph{aspect-ratio:1/1;border-radius:4px;background:linear-gradient(135deg,#e9d5ff,#f0abfc);display:grid;place-items:center;font-size:26px;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.pol p{margin:7px 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pol-actions{display:flex;justify-content:center;gap:6px;margin-top:4px}
+.pol-btn{background:none;border:none;box-shadow:none;padding:2px 5px;font-size:11px;color:#7c1fe0;text-decoration:underline;cursor:pointer}
+.hint{font-size:13px;text-align:center;margin:14px 0 0;opacity:.85}
+
+/* lightbox modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;place-items:center;z-index:100;padding:20px}
+.modal.active{display:grid}
+.modal-content{background:var(--win);border:3px solid var(--shadow);border-radius:14px;max-width:480px;width:100%;padding:16px;box-shadow:8px 8px 0 #000;text-align:center}
+.modal-content img{max-width:100%;max-height:60vh;border-radius:8px;border:2px solid var(--shadow);object-fit:contain}
+
+/* interactive heart button */
+.love-counter-box{
+  background:var(--chrome);border:2px solid var(--shadow);border-radius:12px;
+  padding:14px;text-align:center;margin-top:14px;box-shadow:3px 3px 0 var(--shadow);
+}
+.love-score{font-family:'Nunito',sans-serif;font-size:24px;font-weight:900;color:var(--bar2);margin:4px 0}
+:root[data-theme="dark"] .love-score{color:#f5d0fe}
+
+/* bottom controls */
+.fixed-tools{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;z-index:40}
+.theme,.cfg-btn{padding:8px 12px;font-size:12px}
+
+.foot{text-align:center;font-size:13px;margin-top:30px}
+.counter{display:inline-block;font-family:'Nunito',sans-serif;font-weight:800;background:#1e0a3c;color:#f0abfc;padding:4px 10px;border-radius:6px;border:2px solid var(--shadow);letter-spacing:.2em}
+
+/* flying particles */
+.sp{position:fixed;pointer-events:none;z-index:90;font-size:22px;animation:fly 1.2s cubic-bezier(.12,.8,.32,1) forwards}
+@keyframes fly{to{transform:translate(var(--dx),var(--dy)) rotate(360deg);opacity:0}}
+.trail-heart{position:fixed;pointer-events:none;z-index:85;font-size:14px;user-select:none;animation:trailFloat 1s forwards}
+@keyframes trailFloat{to{transform:translateY(-35px) scale(0);opacity:0}}
+
+/* Touch targets & Mobile interaction */
+button, .pol, .letter-seal, .disc{
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Tối ưu hiển thị hoàn hảo trên điện thoại */
+@media (max-width: 600px){
+  .wrap{padding:12px 10px 85px}
+  .win{box-shadow:4px 4px 0 var(--shadow);border-width:2.5px;margin-bottom:16px;border-radius:12px}
+  .bar{padding:7px 10px;font-size:11.5px}
+  .dots i{width:12px;height:12px}
+  .body{padding:15px 12px}
+  .hero h1{font-size:clamp(26px,8.5vw,38px);margin:4px 0}
+  .hero .sub{font-size:14.5px;margin:6px 0 0}
+  
+  /* Đồng hồ 5 ô trên điện thoại */
+  .timer-grid{gap:4px}
+  .time-box{padding:6px 1px;border-radius:8px}
+  .time-num{font-size:clamp(15px,5vw,22px)}
+  .time-lbl{font-size:9px;letter-spacing:0;white-space:nowrap}
+  
+  /* Khung ảnh 2 cột đều đẹp trên mọi kích cỡ điện thoại */
+  .gal{grid-template-columns:repeat(2,1fr);gap:10px}
+  .pol{padding:6px 6px 8px;font-size:12px}
+  
+  /* Khung lời chúc & bức thư */
+  .term{min-height:92px;padding:12px;font-size:15px}
+  .letter-card{padding:14px;font-size:14px}
+  .letter-seal{padding:12px;font-size:14px}
+  
+  /* Nút bấm trên điện thoại */
+  button{padding:10px 20px;font-size:14px}
+  .btn-mini{padding:6px 12px;font-size:11.5px}
+  
+  /* Modal trên điện thoại */
+  .modal{padding:12px}
+  .modal-content{padding:14px;max-height:88vh;overflow-y:auto;border-radius:12px}
+  .modal-content input{font-size:16px !important} /* Chống iOS Safari tự ý phóng to trang */
+  .modal-content img{max-height:45vh}
+  
+  /* Nút chức năng cố định ở góc */
+  .fixed-tools{right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));gap:6px}
+  .theme,.cfg-btn{padding:7px 10px;font-size:11.5px}
+}
+
+@media (max-width: 400px){
+  .music-bar{flex-direction:column;align-items:stretch;text-align:center;gap:8px}
+  .music-info{justify-content:center}
+  .music-btns{justify-content:center;width:100%}
+  .music-btns .btn-mini{flex:1;text-align:center}
+  .timer-grid{gap:3px}
+  .time-lbl{font-size:8px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .marq span,.star,.disc.playing{animation:none}
+  .marq span{padding-left:0}
+  .sp,.trail-heart{display:none}
+  body::before, body::after{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="marq" aria-hidden="true"><span>♡ Tạo Riêng Cho Cậu ♡ Nhớ Mỉm Cười Khi Xem Nha ♡ Đang Nạp Yêu Thương... 100% ♡ Dành Riêng Cho Cậu ♡</span></div>
+
+  <!-- Music Player -->
+  <div class="music-bar">
+    <div class="music-info">
+      <div class="disc" id="musicDisc">♫</div>
+      <div>
+        <div style="font-size:13px;line-height:1.2" id="musicTitle">Giai điệu lofi dành riêng cho cậu</div>
+        <div style="font-size:11px;opacity:.7" id="musicStatus">Nhấn để bật nhạc êm dịu</div>
+      </div>
+    </div>
+    <div class="music-btns">
+      <button class="btn-mini" id="playMusicBtn">▶ Bật nhạc</button>
+      <button class="btn-mini alt" id="customAudioBtn" title="Chọn file nhạc từ máy">Tải bài hát</button>
+      <input type="file" id="audioFileInput" accept="audio/*" hidden>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="win">
+    <div class="bar"><span>Xin Chào</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="body hero">
+      <div class="star" aria-hidden="true">✦</div>
+      <h1 id="title">Chào Cậu,</h1>
+      <p class="sub" id="heroSub">Mình tạo một trang web nhỏ này vì thấy nhắn tin thôi là chưa đủ...</p>
+    </div>
+  </section>
+
+  <!-- Love Days Timer -->
+  <section class="win">
+    <div class="bar"><span>Đồng Hồ Rung Động</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="body" style="text-align:center">
+      <div style="font-weight:700;font-size:15px" id="timerTitle">Thời gian trái tim mình đã rung động vì cậu:</div>
+      <div class="timer-grid">
+        <div class="time-box"><div class="time-num" id="mo-val">2</div><div class="time-lbl">Tháng</div></div>
+        <div class="time-box"><div class="time-num" id="d-val">0</div><div class="time-lbl">Ngày</div></div>
+        <div class="time-box"><div class="time-num" id="h-val">00</div><div class="time-lbl">Giờ</div></div>
+        <div class="time-box"><div class="time-num" id="m-val">00</div><div class="time-lbl">Phút</div></div>
+        <div class="time-box"><div class="time-num" id="s-val">00</div><div class="time-lbl">Giây</div></div>
+      </div>
+      <div style="font-size:12px;opacity:.8;margin-top:8px">...và con số này vẫn đang tăng lên từng giây từng khắc ♡</div>
+    </div>
+  </section>
+
+  <!-- Secret Letter -->
+  <section class="win">
+    <div class="bar"><span>Bức Thư Bí Mật</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="body">
+      <div class="letter-seal" id="letterSeal">
+        <span style="font-size:24px">✉️</span><br>
+        <strong>Có một bức thư được khóa kỹ tại đây</strong><br>
+        <span style="font-size:12px;opacity:.8">(Chạm vào đây để mở phong bì)</span>
+      </div>
+      <div class="letter-card" id="letterContent">
+        <p style="margin-top:0"><strong>Gửi người tớ thích thầm,</strong></p>
+        <p id="letterBody">
+          Có những ngày dù mệt mỏi đến đâu, chỉ cần nhìn thấy nụ cười của cậu hay một dòng tin nhắn ngắn ngủi cũng đủ khiến cả ngày của tớ bỗng chốc hóa dịu dàng.<br><br>
+          Cảm ơn vì cậu đã xuất hiện và khiến cuộc sống của tớ có thêm thật nhiều màu sắc rực rỡ. Tớ hy vọng hôm nay và nhiều ngày sau nữa, niềm vui sẽ luôn ở bên cạnh cậu.
+        </p>
+        <p style="text-align:right;margin-bottom:0"><em>— Người luôn dõi theo cậu ♡</em></p>
+        <p style="text-align:center;margin:15px 0 0"><button class="btn-mini alt" id="closeLetterBtn">Gấp thư lại</button></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Things I noticed -->
+  <section class="win">
+    <div class="bar"><span>Những Điều Tớ Để Ý</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="body">
+      <ul class="notes">
+        <li>Nụ cười của cậu làm bừng sáng cả một ngày của mình.</li>
+        <li>Cậu là thông báo duy nhất mà mình luôn ngóng chờ nhất.</li>
+        <li>Ở cạnh cậu, những điều bình dị nhất cũng hóa một chuyến phiêu lưu kỳ diệu.</li>
+        <li>Mình nghĩ về cậu nhiều hơn những gì mình dám thừa nhận đấy.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Wishes Terminal -->
+  <section class="win">
+    <div class="bar"><span>Gửi Lời Chúc</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="body">
+      <div class="term" aria-live="polite"><span id="wtext"></span><span class="cur" aria-hidden="true"></span></div>
+      <p class="center"><button id="wishBtn">Gửi thêm lời chúc ♡</button></p>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="win">
+    <div class="bar"><span>Khoảnh Khắc Kỷ Niệm</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="body">
+      <div class="gal" id="gal"></div>
+      <p class="hint">Chạm vào khung ảnh để thay ảnh mới • ảnh sẽ tự động được lưu lại trên máy ♡</p>
+      <input type="file" accept="image/*" id="file" hidden>
+    </div>
+  </section>
+
+  <!-- Feelings Loader -->
+  <section class="win">
+    <div class="bar"><span>Đo Mức Độ Tình Cảm</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="body">
+      <div style="font-weight:700">Đang đo mức độ tình cảm dành cho cậu...</div>
+      <div class="prog"><b id="fill"></b></div>
+      <div style="font-weight:600"><span id="pct">0%</span> <span id="status">Chờ chút xíu nha...</span></div>
+      <p><button id="start" class="alt">Kiểm tra ngay</button></p>
+    </div>
+  </section>
+
+  <!-- Interactive Love Clicker -->
+  <section class="win">
+    <div class="bar"><span>Bắn Tim Cho Cậu</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+    <div class="body">
+      <div class="love-counter-box">
+        <div style="font-size:14px;font-weight:700">Tổng số trái tim đã bắn về phía cậu:</div>
+        <div class="love-score" id="heartCount">0</div>
+        <button id="sendHeartBtn">Bắn tim cho cậu nè ♡</button>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">Cậu là vị khách đặc biệt thứ <span class="counter">000001</span><br>Được tạo bằng tất cả ♡ từ một người rất thích cậu</p>
+</div>
+
+<!-- Modal xem ảnh lớn -->
+<div class="modal" id="imgModal" role="dialog" aria-modal="true" aria-label="Xem ảnh phóng to">
+  <div class="modal-content">
+    <img id="modalImg" src="" alt="Ảnh kỷ niệm">
+    <p id="modalCap" style="font-weight:700;margin:10px 0"></p>
+    <div style="display:flex;justify-content:center;gap:10px">
+      <button class="btn-mini" id="modalChangeBtn">Đổi ảnh này</button>
+      <button class="btn-mini alt" id="modalCloseBtn">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal tùy chỉnh nhanh (Settings) -->
+<div class="modal" id="cfgModal" role="dialog" aria-modal="true" aria-label="Tùy chỉnh trang web">
+  <div class="modal-content" style="text-align:left">
+    <h3 style="margin-top:0;font-family:'Nunito',sans-serif;font-weight:900;color:var(--bar2)">⚙️ Tùy chỉnh trang web</h3>
+    <label style="display:block;font-size:13px;font-weight:700;margin:8px 0 3px">Tên người ấy (Crush):</label>
+    <input type="text" id="cfgName" style="width:100%;padding:9px;border-radius:6px;border:2px solid var(--shadow);font-family:inherit;font-size:16px" placeholder="Ví dụ: Linh, Em bé, v.v...">
+    
+    <label style="display:block;font-size:13px;font-weight:700;margin:12px 0 3px">Ngày bắt đầu thích / quen nhau:</label>
+    <input type="date" id="cfgDate" style="width:100%;padding:9px;border-radius:6px;border:2px solid var(--shadow);font-family:inherit;font-size:16px">
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px">
+      <button class="btn-mini alt" id="cfgCancelBtn">Hủy</button>
+      <button class="btn-mini" id="cfgSaveBtn">Lưu lại ♡</button>
+    </div>
+  </div>
+</div>
+
+<!-- Fixed controls -->
+<div class="fixed-tools">
+  <button class="theme alt" id="cfgOpenBtn" title="Chỉnh sửa thông tin">⚙️ Tùy chỉnh</button>
+  <button class="theme alt" id="theme" aria-label="Chuyển chế độ sáng và tối">☀️ / 🌙</button>
+</div>
+
+<script>
+/* ================= CẤU HÌNH MẶC ĐỊNH ================= */
+/*function getTwoMonthsAgoStr(){
+  var d = new Date();
+  d.setMonth(d.getMonth() - 2);
+  var y = d.getFullYear();
+  var m = ('0' + (d.getMonth() + 1)).slice(-2);
+  var day = ('0' + d.getDate()).slice(-2);
+  return y + '-' + m + '-' + day;
+}*/
+
+var DEFAULT_CONFIG = {
+  crushName: "",                     // Ví dụ: "Linh" — để trống sẽ hiển thị "Chào Cậu,"
+  startDate: '',   // Mặc định cách đây đúng 2 tháng
+  caps: ['Khoảnh Khắc 1', 'Khoảnh Khắc 2', 'Khoảnh Khắc 3', 'Khoảnh Khắc 4', 'Khoảnh Khắc 5', 'Khoảnh Khắc 6']
+};
+
+var savedStart = localStorage.getItem('fy_startDate');
+if (!savedStart || savedStart === '2026-01-01'){
+  savedStart = DEFAULT_CONFIG.startDate;
+  localStorage.setItem('fy_startDate', savedStart);
+}
+
+// Đọc cấu hình từ localStorage nếu có
+var config = {
+  crushName: localStorage.getItem('fy_crushName') !== null ? localStorage.getItem('fy_crushName') : DEFAULT_CONFIG.crushName,
+  startDate: savedStart,
+  caps: DEFAULT_CONFIG.caps
+};
+
+function applyConfig(){
+  if (config.crushName.trim()){
+    document.getElementById('title').textContent = 'Gửi ' + config.crushName + ' ♡';
+    document.title = 'Dành Riêng Cho ' + config.crushName + ' ♡';
+  } else {
+    document.getElementById('title').textContent = 'Chào Cậu,';
+    document.title = 'Dành Riêng Cho Cậu ♡';
+  }
+}
+applyConfig();
+
+/* ================= LỜI CHÚC TỰ GÕ ================= */
+var WISHES = [
+  'Chúc cậu mỗi sáng thức dậy đều có một lý do để mỉm cười thật tươi.',
+  'Chúc cậu luôn được yêu thương đúng cách, và nếu được thì là bởi mình nhé.',
+  'Chúc những điều ước của cậu đều thành hiện thực, như cách cậu bước vào đời mình vậy.',
+  'Chúc nụ cười của cậu luôn rạng rỡ và ấm áp như ánh nắng sớm mai.',
+  'Chúc cậu một ngày thật nhẹ nhàng, và tối nay nhớ ngủ thật ngon nha.'
+];
+
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var wt = document.getElementById('wtext'), wi = 0, wtimer;
+function typeWish(i){
+  clearTimeout(wtimer);
+  var s = WISHES[i % WISHES.length], c = 0;
+  if (reduce){ wt.textContent = s; return; }
+  wt.textContent = '';
+  (function step(){
+    c++; wt.textContent = s.slice(0, c);
+    if (c < s.length) wtimer = setTimeout(step, 40);
+    else wtimer = setTimeout(function(){ wi++; typeWish(wi); }, 3500);
+  })();
+}
+typeWish(0);
+
+document.getElementById('wishBtn').onclick = function(){
+  wi++; typeWish(wi);
+  spawnSparkles(this.getBoundingClientRect(), 14);
+};
+
+/* ================= HIỆU ỨNG TIA SÁNG & TRÁI TIM BAY ================= */
+function spawnSparkles(r, count){
+  if (reduce) return;
+  var icons = ['♡','✦','♥','✧','🌸','✨'];
+  for (var i = 0; i < count; i++){
+    var s = document.createElement('div');
+    s.className = 'sp';
+    s.textContent = icons[Math.floor(Math.random() * icons.length)];
+    s.style.left = (r.left + r.width / 2) + 'px';
+    s.style.top = (r.top + r.height / 2) + 'px';
+    s.style.color = i % 2 ? '#a855f7' : '#f0abfc';
+    s.style.setProperty('--dx', ((Math.random() - .5) * 260) + 'px');
+    s.style.setProperty('--dy', (-60 - Math.random() * 180) + 'px');
+    document.body.appendChild(s);
+    setTimeout(function(el){ el.remove(); }, 1200, s);
+  }
+}
+
+// Vết trái tim nhẹ nhàng theo con trỏ chuột
+if (!reduce){
+  var lastTrail = 0;
+  window.addEventListener('mousemove', function(e){
+    var now = Date.now();
+    if (now - lastTrail < 80) return;
+    lastTrail = now;
+    var t = document.createElement('span');
+    t.className = 'trail-heart';
+    t.textContent = Math.random() > 0.5 ? '♡' : '✦';
+    t.style.left = (e.clientX + (Math.random() * 10 - 5)) + 'px';
+    t.style.top = (e.clientY + (Math.random() * 10 - 5)) + 'px';
+    t.style.color = Math.random() > 0.5 ? '#b45cff' : '#f0abfc';
+    document.body.appendChild(t);
+    setTimeout(function(){ t.remove(); }, 1000);
+  });
+}
+
+/* ================= BỨC THƯ BÍ MẬT ================= */
+var letterSeal = document.getElementById('letterSeal');
+var letterContent = document.getElementById('letterContent');
+var closeLetterBtn = document.getElementById('closeLetterBtn');
+
+letterSeal.onclick = function(){
+  letterSeal.style.display = 'none';
+  letterContent.style.display = 'block';
+  spawnSparkles(letterSeal.getBoundingClientRect(), 12);
+};
+closeLetterBtn.onclick = function(){
+  letterContent.style.display = 'none';
+  letterSeal.style.display = 'block';
+};
+
+/* ================= ĐỒNG HỒ ĐẾM NGÀY ================= */
+function updateTimer(){
+  var startDate = new Date(config.startDate);
+  var now = new Date();
+
+  if (isNaN(startDate.getTime()) || now < startDate){
+    document.getElementById('mo-val').textContent = '0';
+    document.getElementById('d-val').textContent = '0';
+    document.getElementById('h-val').textContent = '00';
+    document.getElementById('m-val').textContent = '00';
+    document.getElementById('s-val').textContent = '00';
+    return;
+  }
+
+  // Tính số tháng chính xác theo lịch
+  var months = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
+  var temp = new Date(startDate.getFullYear(), startDate.getMonth() + months, startDate.getDate(), startDate.getHours(), startDate.getMinutes(), startDate.getSeconds());
+  if (temp > now){
+    months--;
+    temp = new Date(startDate.getFullYear(), startDate.getMonth() + months, startDate.getDate(), startDate.getHours(), startDate.getMinutes(), startDate.getSeconds());
+  }
+
+  var diff = Math.max(0, now.getTime() - temp.getTime());
+  var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('mo-val').textContent = months;
+  document.getElementById('d-val').textContent = days;
+  document.getElementById('h-val').textContent = (hours < 10 ? '0' : '') + hours;
+  document.getElementById('m-val').textContent = (minutes < 10 ? '0' : '') + minutes;
+  document.getElementById('s-val').textContent = (seconds < 10 ? '0' : '') + seconds;
+}
+setInterval(updateTimer, 1000);
+updateTimer();
+
+/* ================= THƯ VIỆN ẢNH + LOCALSTORAGE + LIGHTBOX ================= */
+var gal = document.getElementById('gal'), fileIn = document.getElementById('file'), currentPick = 0;
+var rots = [-4, 3, -2, 5, -5, 2];
+var imgModal = document.getElementById('imgModal');
+var modalImg = document.getElementById('modalImg');
+var modalCap = document.getElementById('modalCap');
+
+function getSavedPhoto(i){
+  return localStorage.getItem('fy_photo_' + i);
+}
+
+function renderGallery(){
+  gal.innerHTML = '';
+  config.caps.forEach(function(cap, i){
+    var d = document.createElement('div');
+    d.className = 'pol'; d.tabIndex = 0; d.setAttribute('role', 'button');
+    d.setAttribute('aria-label', 'Khung ảnh: ' + cap);
+    d.style.setProperty('--r', rots[i % rots.length] + 'deg');
+
+    var savedSrc = getSavedPhoto(i);
+    var innerPhoto = savedSrc 
+      ? '<img src="' + savedSrc + '" alt="' + cap + '">' 
+      : '<span aria-hidden="true">✦</span>';
+
+    d.innerHTML = '<div class="ph" id="ph' + i + '">' + innerPhoto + '</div>' +
+                  '<p>' + cap + '</p>' +
+                  (savedSrc ? '<div class="pol-actions"><button type="button" class="pol-btn remove-btn" data-idx="' + i + '">xóa</button></div>' : '');
+
+    d.onclick = function(e){
+      if (e.target.classList.contains('remove-btn')) return;
+      currentPick = i;
+      var curSrc = getSavedPhoto(i);
+      if (curSrc){
+        modalImg.src = curSrc;
+        modalCap.textContent = cap;
+        imgModal.classList.add('active');
+      } else {
+        fileIn.value = ''; fileIn.click();
+      }
+    };
+    gal.appendChild(d);
+  });
+
+  // Gắn event xóa ảnh
+  document.querySelectorAll('.remove-btn').forEach(function(btn){
+    btn.onclick = function(e){
+      e.stopPropagation();
+      var idx = this.getAttribute('data-idx');
+      localStorage.removeItem('fy_photo_' + idx);
+      renderGallery();
+    };
+  });
+}
+renderGallery();
+
+fileIn.onchange = function(){
+  var f = fileIn.files[0]; if (!f) return;
+  var fr = new FileReader();
+  fr.onload = function(){
+    try {
+      localStorage.setItem('fy_photo_' + currentPick, fr.result);
+    } catch(e) {
+      alert('Ảnh có dung lượng lớn, hãy thử chọn ảnh nhẹ hơn nhé!');
+    }
+    renderGallery();
+    imgModal.classList.remove('active');
+  };
+  fr.readAsDataURL(f);
+};
+
+document.getElementById('modalCloseBtn').onclick = function(){ imgModal.classList.remove('active'); };
+document.getElementById('modalChangeBtn').onclick = function(){ fileIn.value = ''; fileIn.click(); };
+imgModal.onclick = function(e){ if (e.target === imgModal) imgModal.classList.remove('active'); };
+
+/* ================= MÁY PHÁT NHẠC (LOFI SYNTHESIZER & TẢI NHẠC) ================= */
+var audioCtx = null, isPlaying = false, audioInterval = null;
+var customAudio = null;
+var playBtn = document.getElementById('playMusicBtn');
+var disc = document.getElementById('musicDisc');
+var musicStatus = document.getElementById('musicStatus');
+var musicTitle = document.getElementById('musicTitle');
+var customAudioBtn = document.getElementById('customAudioBtn');
+var audioFileInput = document.getElementById('audioFileInput');
+
+var CHORDS = [
+  [261.63, 329.63, 392.00, 493.88], // Cmaj7
+  [220.00, 261.63, 329.63, 392.00], // Am7
+  [293.66, 349.23, 440.00, 523.25], // Dm7
+  [196.00, 246.94, 293.66, 349.23]  // G7
+];
+var chordIndex = 0;
+
+function playLofiChord(chord){
+  if (!audioCtx) return;
+  var now = audioCtx.currentTime;
+  chord.forEach(function(freq, idx){
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+    osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+
+    gain.gain.setValueAtTime(0.001, now + idx * 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.08, now + idx * 0.08 + 0.15);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 2.8);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now + idx * 0.08);
+    osc.stop(now + idx * 0.08 + 3.0);
+  });
+}
+
+function startLofiSynth(){
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  isPlaying = true;
+  disc.classList.add('playing');
+  playBtn.textContent = '⏸ Tạm dừng';
+  musicStatus.textContent = 'Đang phát giai điệu thư giãn...';
+
+  playLofiChord(CHORDS[chordIndex % CHORDS.length]);
+  audioInterval = setInterval(function(){
+    chordIndex++;
+    playLofiChord(CHORDS[chordIndex % CHORDS.length]);
+  }, 3000);
+}
+
+function stopLofiSynth(){
+  isPlaying = false;
+  disc.classList.remove('playing');
+  playBtn.textContent = '▶ Bật nhạc';
+  musicStatus.textContent = 'Đã tạm dừng';
+  if (audioInterval) clearInterval(audioInterval);
+  if (customAudio) customAudio.pause();
+}
+
+playBtn.onclick = function(){
+  if (customAudio && customAudio.src){
+    if (customAudio.paused){
+      customAudio.play();
+      isPlaying = true;
+      disc.classList.add('playing');
+      playBtn.textContent = '⏸ Tạm dừng';
+      musicStatus.textContent = 'Đang phát bài hát yêu thích...';
+    } else {
+      customAudio.pause();
+      stopLofiSynth();
+    }
+    return;
+  }
+  if (!isPlaying) startLofiSynth();
+  else stopLofiSynth();
+};
+
+customAudioBtn.onclick = function(){ audioFileInput.click(); };
+audioFileInput.onchange = function(){
+  var file = this.files[0];
+  if (!file) return;
+  stopLofiSynth();
+  if (!customAudio) customAudio = new Audio();
+  customAudio.src = URL.createObjectURL(file);
+  customAudio.loop = true;
+  musicTitle.textContent = file.name.replace(/\.[^/.]+$/, "");
+  customAudio.play();
+  isPlaying = true;
+  disc.classList.add('playing');
+  playBtn.textContent = '⏸ Tạm dừng';
+  musicStatus.textContent = 'Đang phát bài hát bạn chọn...';
+};
+
+/* ================= NÚT BẮN TIM TÍCH LŨY ================= */
+var heartCount = parseInt(localStorage.getItem('fy_hearts') || '0', 10);
+var heartCountEl = document.getElementById('heartCount');
+heartCountEl.textContent = heartCount.toLocaleString('vi-VN');
+
+document.getElementById('sendHeartBtn').onclick = function(){
+  heartCount++;
+  heartCountEl.textContent = heartCount.toLocaleString('vi-VN');
+  localStorage.setItem('fy_hearts', heartCount);
+  spawnSparkles(this.getBoundingClientRect(), 16);
+};
+
+/* ================= NỐI VÀ CHẠY THANH ĐO TÌNH CẢM ================= */
+var steps = [
+  [20, 'Đang gom góp can đảm...'],
+  [45, 'Ngại ngùng đỏ mặt...'],
+  [70, 'Tập nói trước gương cả chục lần...'],
+  [99, 'Sắp chạm mức tối đa rồi...'],
+  [100, 'Kết quả: Thích cậu vô cùng! ♡ (Vượt quá giới hạn)']
+];
+document.getElementById('start').onclick = function(){
+  var btn = this; btn.disabled = true;
+  var p = 0, fill = document.getElementById('fill'), pct = document.getElementById('pct'), st = document.getElementById('status');
+  var t = setInterval(function(){
+    p += 1; fill.style.width = p + '%'; pct.textContent = p + '%';
+    steps.forEach(function(s){ if (p >= s[0]) st.textContent = s[1]; });
+    if (p >= 100){
+      clearInterval(t);
+      btn.style.display = 'none';
+      spawnSparkles(btn.getBoundingClientRect(), 25);
+    }
+  }, 35);
+};
+
+/* ================= MODAL CÀI ĐẶT / TÙY CHỈNH ================= */
+var cfgModal = document.getElementById('cfgModal');
+var cfgOpenBtn = document.getElementById('cfgOpenBtn');
+var cfgCancelBtn = document.getElementById('cfgCancelBtn');
+var cfgSaveBtn = document.getElementById('cfgSaveBtn');
+
+cfgOpenBtn.onclick = function(){
+  document.getElementById('cfgName').value = config.crushName;
+  document.getElementById('cfgDate').value = config.startDate;
+  cfgModal.classList.add('active');
+};
+cfgCancelBtn.onclick = function(){ cfgModal.classList.remove('active'); };
+cfgModal.onclick = function(e){ if (e.target === cfgModal) cfgModal.classList.remove('active'); };
+
+cfgSaveBtn.onclick = function(){
+  config.crushName = document.getElementById('cfgName').value.trim();
+  config.startDate = document.getElementById('cfgDate').value || DEFAULT_CONFIG.startDate;
+
+  localStorage.setItem('fy_crushName', config.crushName);
+  localStorage.setItem('fy_startDate', config.startDate);
+
+  applyConfig();
+  updateTimer();
+  cfgModal.classList.remove('active');
+};
+
+/* ================= CHUYỂN ĐỔI CHẾ ĐỘ SÁNG / TỐI ================= */
+var root = document.documentElement;
+document.getElementById('theme').onclick = function(){
+  var isDark = getComputedStyle(root).colorScheme === 'dark';
+  root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+};
+
+// Notes nảy ngẫu nhiên
+var notes = document.querySelectorAll('ul.notes li'), lastN = -1;
+if (!reduce) setInterval(function(){
+  var n;
+  do { n = Math.floor(Math.random() * notes.length); } while (n === lastN && notes.length > 1);
+  lastN = n;
+  var el = notes[n];
+  el.classList.remove('idle'); void el.offsetWidth; el.classList.add('idle');
+  setTimeout(function(){ el.classList.remove('idle'); }, 1000);
+}, 3500);
+</script>
+</body>
+</html>
