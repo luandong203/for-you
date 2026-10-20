@@ -454,7 +454,7 @@ body.is-admin .viewer-only { display: none !important; }
     </div>
   </section>
 
-  <p class="foot">Cậu là vị khách đặc biệt thứ <span class="counter">000001</span><br>Được tạo bằng tất cả ♡ từ một người rất thích cậu</p>
+  <p class="foot">Cậu là vị khách đặc biệt thứ <span class="counter">000001</span><br>Được tạo bằng tất cả ♡ từ một người rất thích cậu <span id="footerAdminTrigger" style="cursor:pointer;opacity:0.4;font-size:12px;margin-left:4px" title="Mở bảng cấu hình">⚙</span></p>
 </div>
 
 <!-- Modal xem ảnh lớn -->
@@ -1073,6 +1073,30 @@ if (!reduce) setInterval(function(){
   el.classList.remove('idle'); void el.offsetWidth; el.classList.add('idle');
   setTimeout(function(){ el.classList.remove('idle'); }, 1000);
 }, 3500);
+
+window.addEventListener('hashchange', function(){
+  if (checkIsAdminUrl()){
+    setMode(true, true);
+    if (typeof openCfgModal === 'function') openCfgModal();
+  } else {
+    setMode(false, true);
+  }
+});
+
+var footerAdminTrigger = document.getElementById('footerAdminTrigger');
+if (footerAdminTrigger){
+  footerAdminTrigger.onclick = function(){
+    setMode(true, true);
+    if (typeof openCfgModal === 'function') openCfgModal();
+  };
+}
+
+if (checkIsAdminUrl()){
+  setTimeout(function(){
+    if (typeof openCfgModal === 'function') openCfgModal();
+  }, 400);
+}
+
 </script>
 </body>
 </html>
