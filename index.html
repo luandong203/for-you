@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Điều Tớ Muốn Nói Với Cậu ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg1: #fff5f8;
+  --bg2: #ffe4ee;
+  --bg3: #ffd1e3;
+  --ink: #5c1632;
+  --ink-soft: #8c3b5b;
+  --card: rgba(255, 255, 255, 0.92);
+  --card-inner: #fff8fa;
+  --bar1: #ff8fab;
+  --bar2: #fb5687;
+  --accent: #ff477e;
+  --accent-hover: #e03168;
+  --border: #d65780;
+  --shadow: #b83b65;
+  --petal: #ffacc5;
+  --badge-bg: #ffeef3;
+  box-sizing: border-box;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg1: #2b0b19;
+  --bg2: #3d1124;
+  --bg3: #521731;
+  --ink: #fff0f5;
+  --ink-soft: #f7bfd0;
+  --card: rgba(66, 19, 40, 0.92);
+  --card-inner: #521832;
+  --bar1: #ff7597;
+  --bar2: #e6396b;
+  --accent: #ff5c8a;
+  --accent-hover: #ff7aa0;
+  --border: #ff85a8;
+  --shadow: #1f0510;
+  --petal: #ff7597;
+  --badge-bg: #611d3b;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  line-height: 1.65;
+  background: linear-gradient(155deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Hiệu ứng nền lấp lánh dịu dàng (blink nhẹ) */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  background:
+    radial-gradient(circle at 15% 18%, rgba(255,255,255,0.95) 0, rgba(255,255,255,0.95) 2px, transparent 4px) 0 0 / 120px 120px,
+    radial-gradient(circle at 76% 32%, rgba(255,255,255,0.9) 0, rgba(255,255,255,0.9) 2.2px, transparent 4.5px) 0 0 / 165px 165px,
+    radial-gradient(circle at 42% 78%, rgba(255,182,205,0.85) 0, rgba(255,182,205,0.85) 2px, transparent 4px) 0 0 / 140px 140px;
+  animation: bgTwinkle 3.8s ease-in-out infinite alternate;
+}
+
+body::after {
+  background:
+    radial-gradient(circle at 84% 16%, rgba(255,255,255,0.92) 0, rgba(255,255,255,0.92) 2px, transparent 4px) 0 0 / 150px 150px,
+    radial-gradient(circle at 26% 64%, rgba(255,194,214,0.85) 0, rgba(255,194,214,0.85) 2.5px, transparent 5px) 0 0 / 185px 185px,
+    radial-gradient(circle at 60% 88%, rgba(255,255,255,0.85) 0, rgba(255,255,255,0.85) 1.8px, transparent 3.5px) 0 0 / 130px 130px;
+  animation: bgTwinkle 5.4s ease-in-out infinite alternate;
+  animation-delay: -2.7s;
+}
+
+@keyframes bgTwinkle {
+  0% { opacity: 0.3; transform: scale(0.99); }
+  50% { opacity: 0.75; }
+  100% { opacity: 1; transform: scale(1.01); }
+}
+
+/* Cánh hoa anh đào / tim rơi nhẹ trên nền */
+.petal-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.falling-petal {
+  position: absolute;
+  top: -30px;
+  color: var(--petal);
+  opacity: 0.65;
+  font-size: 15px;
+  user-select: none;
+  animation: petalFall linear infinite;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(-20px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% { opacity: 0.7; }
+  85% { opacity: 0.7; }
+  100% {
+    transform: translateY(105vh) translateX(45px) rotate(320deg);
+    opacity: 0;
+  }
+}
+
+/* Màn hình chào mở phong bì đầu trang */
+.welcome-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: linear-gradient(155deg, var(--bg1) 0%, var(--bg2) 50%, var(--bg3) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+}
+
+.welcome-gate.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.gate-card {
+  max-width: 420px;
+  width: 100%;
+  background: var(--card);
+  border: 2.5px solid var(--border);
+  border-radius: 26px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(214, 87, 128, 0.22), 0 6px 0 var(--shadow);
+  animation: floatCard 3.2s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.gate-icon {
+  font-size: 52px;
+  line-height: 1;
+  margin-bottom: 12px;
+  display: inline-block;
+  animation: pulseHeart 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseHeart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.14); }
+}
+
+.gate-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(28px, 7vw, 36px);
+  color: var(--accent);
+  margin: 4px 0 10px;
+  font-weight: 700;
+}
+
+.gate-desc {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin: 0 0 22px;
+}
+
+/* Bố cục chính */
+.wrap {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 18px 14px 95px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Thanh chữ chạy đáng yêu */
+.marq {
+  overflow: hidden;
+  white-space: nowrap;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--bar1), var(--bar2));
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 7px 0;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 0 var(--shadow);
+}
+
+.marq span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scrollMarq 22s linear infinite;
+}
+
+@keyframes scrollMarq {
+  to { transform: translateX(-100%); }
+}
+
+/* Thanh phát nhạc */
+.music-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 0 var(--shadow);
+  flex-wrap: wrap;
+}
+
+.music-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.disc {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff8fab, #fb5687);
+  border: 2px solid var(--border);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 15px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(251, 86, 135, 0.35);
+}
+
+.disc.playing {
+  animation: spin 3.2s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.music-btns {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.volume-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card-inner);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+}
+
+.vol-icon {
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+}
+
+.vol-slider {
+  width: 68px;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #ffc2d4;
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+.vol-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 1.5px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+.vol-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 1.5px solid #fff;
+  cursor: pointer;
+}
+
+/* Khung thẻ (Cards) chuẩn vibe hồng ngọt ngào */
+.card-win {
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  border: 2.5px solid var(--border);
+  border-radius: 22px;
+  box-shadow: 0 6px 0 var(--shadow), 0 12px 28px rgba(214, 87, 128, 0.12);
+  margin: 0 0 22px;
+  overflow: hidden;
+}
+
+.card-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 16px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0) 55%),
+              linear-gradient(90deg, var(--bar1), var(--bar2));
+  border-bottom: 2px solid var(--border);
+}
+
+.bar-hearts {
+  display: flex;
+  gap: 5px;
+  font-size: 12px;
+}
+
+.bar-hearts i {
+  font-style: normal;
+  opacity: 0.92;
+}
+
+.card-body {
+  padding: 22px 20px;
+}
+
+/* Phần mở đầu Hero */
+.hero {
+  text-align: center;
+  padding: 28px 20px 26px;
+}
+
+.hero-emblem {
+  display: inline-grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--badge-bg);
+  border: 2px dashed var(--bar2);
+  font-size: 26px;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 8px;
+  transition: transform 0.2s;
+}
+
+.hero-emblem:active {
+  transform: scale(0.9);
+}
+
+.hero-tag {
+  display: inline-block;
+  background: var(--badge-bg);
+  color: var(--accent);
+  border: 1.5px solid var(--bar1);
+  border-radius: 999px;
+  padding: 3px 14px;
+  font-size: 12.5px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.hero h1 {
+  margin: 4px 0 8px;
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(38px, 10vw, 60px);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--accent);
+  text-shadow: 2px 2px 0 rgba(255, 143, 171, 0.35);
+}
+
+.hero .sub {
+  font-size: 16.5px;
+  max-width: 540px;
+  margin: 6px auto 0;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Đồng hồ đếm thời gian rung động */
+.timer-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  text-align: center;
+  margin: 14px 0 8px;
+}
+
+.time-box {
+  background: var(--card-inner);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 4px;
+  box-shadow: 0 3px 0 var(--shadow);
+}
+
+.time-num {
+  font-size: clamp(18px, 4.8vw, 28px);
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1.05;
+}
+
+.time-lbl {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+/* Lưới Lý Do Thích Cậu */
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.reason-item {
+  background: var(--card-inner);
+  border: 2px dashed var(--bar1);
+  border-radius: 16px;
+  padding: 14px 15px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.reason-item:hover,
+.reason-item.popped {
+  transform: translateY(-3px);
+  border-style: solid;
+  border-color: var(--accent);
+  box-shadow: 0 4px 0 var(--shadow);
+}
+
+.reason-icon {
+  font-size: 22px;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.reason-text {
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+/* Khung ảnh Polaroid dán băng keo hồng (Washi Tape) */
+.gal {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.pol {
+  background: #fff;
+  color: #5c1632;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 10px 12px;
+  box-shadow: 0 4px 0 var(--shadow);
+  text-align: center;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transform: rotate(var(--r, -2deg));
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  position: relative;
+}
+
+.pol::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 54px;
+  height: 15px;
+  background: rgba(255, 143, 171, 0.55);
+  border: 1px solid rgba(214, 87, 128, 0.35);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.pol:hover {
+  transform: scale(1.05) rotate(0deg);
+  z-index: 2;
+  box-shadow: 0 8px 18px rgba(214, 87, 128, 0.28);
+}
+
+.pol .ph {
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  border: 1.5px solid #ffc2d4;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  color: #ff8fab;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fff0f5, #ffd6e4);
+}
+
+.pol img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pol p {
+  margin: 9px 0 0;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.pol-actions {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: none;
+}
+
+.pol:hover .pol-actions {
+  display: block;
+}
+
+.pol-btn {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 800;
+  box-shadow: 0 2px 0 var(--shadow);
+}
+
+.hint {
+  text-align: center;
+  font-size: 13px;
+  margin: 14px 0 0;
+  color: var(--ink-soft);
+}
+
+/* Bức thư tỏ tình */
+.letter-seal {
+  text-align: center;
+  padding: 22px 16px;
+  cursor: pointer;
+  border: 2.5px dashed var(--bar2);
+  border-radius: 18px;
+  background: var(--card-inner);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.letter-seal:hover {
+  transform: scale(1.015);
+  background: var(--badge-bg);
+}
+
+.seal-wax {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ff8fab, #e03168);
+  border: 2.5px solid #fff;
+  box-shadow: 0 4px 10px rgba(224, 49, 104, 0.4);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 24px;
+  animation: pulseHeart 1.8s ease-in-out infinite;
+}
+
+.letter-paper {
+  display: none;
+  background: var(--card-inner);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 24px 22px;
+  box-shadow: inset 0 0 24px rgba(255, 143, 171, 0.16);
+  line-height: 1.85;
+  font-size: 15.5px;
+  animation: fadeSlideUp 0.45s ease;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.letter-greeting {
+  font-family: 'Dancing Script', cursive;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+
+.letter-sign {
+  font-family: 'Dancing Script', cursive;
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: right;
+  margin: 16px 0 0;
+}
+
+/* ================= PHẦN TỎ TÌNH CHÍNH THỨC (CLIMAX) ================= */
+.confess-card {
+  border-width: 3px;
+  border-color: var(--accent);
+  box-shadow: 0 8px 0 var(--shadow), 0 16px 38px rgba(255, 71, 126, 0.22);
+}
+
+.confess-stage {
+  text-align: center;
+  padding: 10px 6px 6px;
+  position: relative;
+  min-height: 290px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cute-mascot {
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 10px;
+  animation: floatCard 2.6s ease-in-out infinite;
+}
+
+.confess-question {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(30px, 8vw, 44px);
+  color: var(--accent);
+  margin: 6px 0 8px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.confess-sub {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  margin: 0 auto 22px;
+  max-width: 460px;
+}
+
+.confess-playground {
+  position: relative;
+  width: 100%;
+  min-height: 115px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+/* Nút bấm chung */
+button {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: #fff;
+  cursor: pointer;
+  padding: 11px 24px;
+  border-radius: 999px;
+  border: 2.5px solid var(--border);
+  background: linear-gradient(180deg, #ff9ebb, var(--accent));
+  box-shadow: 0 4px 0 var(--shadow);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+  touch-action: manipulation;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--shadow);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--shadow);
+}
+
+button.alt {
+  background: var(--card-inner);
+  color: var(--ink);
+}
+
+.btn-mini {
+  padding: 6px 14px;
+  font-size: 12.5px;
+  border-width: 2px;
+  box-shadow: 0 3px 0 var(--shadow);
+}
+
+.btn-yes {
+  font-size: 17px;
+  padding: 13px 32px;
+  background: linear-gradient(180deg, #ff85a8, #ff3370);
+  border-color: #b81d4d;
+  box-shadow: 0 5px 0 #9e143f, 0 8px 20px rgba(255, 51, 112, 0.38);
+  z-index: 3;
+}
+
+.btn-no {
+  font-size: 14px;
+  padding: 10px 20px;
+  background: var(--card-inner);
+  color: var(--ink-soft);
+  transition: left 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+              top 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.18s ease;
+  z-index: 2;
+}
+
+/* Màn hình ăn mừng khi bấm ĐỒNG Ý */
+.confess-accepted {
+  display: none;
+  text-align: center;
+  padding: 12px 6px;
+  animation: fadeSlideUp 0.55s ease;
+}
+
+.confess-accepted.show {
+  display: block;
+}
+
+.couple-ticket {
+  background: linear-gradient(135deg, var(--card-inner), var(--badge-bg));
+  border: 2.5px dashed var(--accent);
+  border-radius: 20px;
+  padding: 20px 18px;
+  margin: 16px auto;
+  max-width: 500px;
+  box-shadow: 0 6px 18px rgba(255, 71, 126, 0.14);
+}
+
+.ticket-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 900;
+  padding: 3px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.ticket-time {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.reply-box {
+  margin-top: 16px;
+  text-align: left;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reply-box textarea {
+  width: 100%;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 11px 13px;
+  font-family: inherit;
+  font-size: 16px;
+  background: var(--card);
+  color: var(--ink);
+  resize: vertical;
+  min-height: 76px;
+  outline: none;
+}
+
+.reply-box textarea:focus {
+  border-color: var(--accent);
+}
+
+/* Hiệu ứng hạt tim bay khi tương tác */
+.sp {
+  position: fixed;
+  pointer-events: none;
+  font-size: 20px;
+  z-index: 999;
+  animation: flySparkle 1.25s ease-out forwards;
+}
+
+@keyframes flySparkle {
+  to {
+    transform: translate(var(--dx), var(--dy)) rotate(25deg) scale(0.4);
+    opacity: 0;
+  }
+}
+
+.trail-heart {
+  position: fixed;
+  pointer-events: none;
+  font-size: 13px;
+  z-index: 90;
+  animation: trailUp 1s ease-out forwards;
+}
+
+@keyframes trailUp {
+  0% { opacity: 0.85; transform: scale(1) translateY(0); }
+  100% { opacity: 0; transform: scale(0.35) translateY(-28px); }
+}
+
+/* Footer */
+.foot {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 26px;
+}
+
+.heart-pill {
+  display: inline-block;
+  background: var(--badge-bg);
+  color: var(--accent);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 1px 10px;
+  font-weight: 800;
+}
+
+/* Modal chung */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(58, 12, 31, 0.62);
+  z-index: 600;
+  place-items: center;
+  padding: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.modal.active {
+  display: grid;
+}
+
+.modal-content {
+  background: var(--card);
+  border: 2.5px solid var(--border);
+  border-radius: 22px;
+  padding: 20px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 8px 0 var(--shadow);
+  text-align: center;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content img {
+  max-width: 100%;
+  max-height: 58vh;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+}
+
+.cfg-field {
+  margin-bottom: 11px;
+  text-align: left;
+}
+
+.cfg-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+
+.cfg-field input,
+.cfg-field textarea {
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  background: var(--card-inner);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;
+  outline: none;
+}
+
+.cfg-field textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+/* Cụm nút nổi góc dưới */
+.fixed-tools {
+  position: fixed;
+  right: 14px;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  gap: 8px;
+  z-index: 95;
+}
+
+.tool-pill {
+  padding: 8px 13px;
+  font-size: 12.5px;
+}
+
+/* Phân tách chế độ Quản trị (Admin) và Người xem (Viewer) */
+body.is-viewer .admin-only {
+  display: none !important;
+}
+
+body.is-admin .viewer-only {
+  display: none !important;
+}
+
+.admin-badge-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: linear-gradient(90deg, #e03168, #ff7597);
+  color: #fff;
+  padding: 9px 15px;
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 0 var(--shadow);
+  flex-wrap: wrap;
+}
+
+.mode-toast {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-40px);
+  background: var(--card);
+  color: var(--ink);
+  border: 2.5px solid var(--border);
+  box-shadow: 0 5px 0 var(--shadow);
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 13.5px;
+  font-weight: 800;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  white-space: nowrap;
+  max-width: 92vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mode-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Tối ưu hiển thị điện thoại & máy tính bảng */
+@media (max-width: 620px) {
+  .wrap { padding: 12px 10px 88px; }
+  .card-win { border-radius: 18px; margin-bottom: 16px; box-shadow: 0 4px 0 var(--shadow); }
+  .card-body { padding: 16px 13px; }
+  .reasons-grid { grid-template-columns: 1fr; gap: 10px; }
+  .gal { grid-template-columns: repeat(2, 1fr); gap: 11px; }
+  .pol { padding: 7px 7px 9px; font-size: 12px; }
+  .timer-grid { gap: 5px; }
+  .time-box { padding: 7px 2px; border-radius: 10px; }
+  .time-lbl { font-size: 9.5px; }
+  .letter-paper { padding: 18px 15px; font-size: 14.5px; }
+  .fixed-tools { right: 10px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
+}
+
+@media (max-width: 420px) {
+  .music-bar { flex-direction: column; align-items: stretch; text-align: center; gap: 9px; }
+  .music-info { justify-content: center; }
+  .music-btns { justify-content: center; width: 100%; }
+  .time-lbl { font-size: 8.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marq span, .disc.playing, .falling-petal, .gate-card, .cute-mascot { animation: none !important; }
+  .marq span { padding-left: 0; }
+  body::before, body::after, .sp, .trail-heart { display: none !important; }
+}
+</style>
+</head>
+<body class="is-viewer">
+
+<!-- Nền cánh hoa hồng rơi nhẹ -->
+<div class="petal-layer" id="petalLayer" aria-hidden="true"></div>
+
+<!-- Toast thông báo -->
+<div class="mode-toast" id="modeToast"></div>
+
+<!-- Màn hình phong bì mở đầu (giúp bật nhạc mượt đúng chuẩn trình duyệt) -->
+<div class="welcome-gate" id="welcomeGate">
+  <div class="gate-card">
+    <div class="gate-icon" aria-hidden="true">💌</div>
+    <div class="gate-title" id="gateTitle">Gửi Người Tớ Thương...</div>
+    <p class="gate-desc">Tớ đã gói ghém rất nhiều tâm tư và một câu hỏi thật đặc biệt ở bên trong trang nhỏ này.</p>
+    <button type="button" class="btn-yes" id="enterSiteBtn">Chạm để mở ra nhé ♡</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- Thanh công cụ Admin (chỉ hiển thị khi bật quyền Quản trị) -->
+  <div class="admin-badge-bar admin-only">
+    <span>👑 Chế Độ Quản Trị (Chỉ Mình Bạn Thấy)</span>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button type="button" class="btn-mini alt" id="previewViewerBtn">👀 Xem Như Người Ấy</button>
+      <button type="button" class="btn-mini" id="openSettingsTopBtn">⚙️ Chỉnh Sửa Nội Dung</button>
+    </div>
+  </div>
+
+  <!-- Dòng chữ chạy ngang -->
+  <div class="marq" aria-hidden="true">
+    <span>🌸 Hôm Nay Tớ Có Một Điều Rất Quan Trọng Muốn Nói Với Cậu ♡ Cảm Ơn Cậu Đã Đến Bên Đời Tớ 🌸 Nhớ Bật Nhạc Và Đọc Hết Đến Cuối Trang Nha ♡</span>
+  </div>
+
+  <!-- Trình phát nhạc kèm chỉnh âm lượng -->
+  <div class="music-bar">
+    <div class="music-info">
+      <div class="disc" id="musicDisc">♫</div>
+      <div>
+        <div style="font-size:13.5px;line-height:1.2;font-weight:800" id="musicTitle">Giai điệu ngọt ngào dành tặng cậu</div>
+        <div style="font-size:11.5px;color:var(--ink-soft)" id="musicStatus">Nhấn để phát nhạc nền lãng mạn</div>
+      </div>
+    </div>
+    <div class="music-btns">
+      <div class="volume-box" title="Điều chỉnh âm lượng">
+        <span class="vol-icon" id="volIcon" role="button" aria-label="Tắt hoặc bật tiếng" tabindex="0">🔊</span>
+        <input type="range" class="vol-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.75" aria-label="Thanh âm lượng">
+      </div>
+      <button type="button" class="btn-mini" id="playMusicBtn">▶ Bật nhạc</button>
+      <button type="button" class="btn-mini alt admin-only" id="customAudioBtn" title="Chọn nhạc từ máy để nghe thử">🎵 Đổi nhạc</button>
+      <input type="file" id="audioFileInput" accept="audio/*" hidden>
+    </div>
+  </div>
+
+  <!-- 1. Mở đầu chào người thương -->
+  <section class="card-win">
+    <div class="card-bar">
+      <span>🌸 Lời Mở Đầu Từ Trái Tim</span>
+      <span class="bar-hearts" aria-hidden="true"><i>♡</i><i>♥</i><i>♡</i></span>
+    </div>
+    <div class="card-body hero">
+      <div class="hero-emblem" id="secretEmblem" title="Chạm 3 lần để bật/tắt Quản trị">🌸</div>
+      <div><span class="hero-tag">✨ Dành riêng cho một người duy nhất ✨</span></div>
+      <h1 id="heroTitle">Gửi Phương ♡</h1>
+      <p class="sub" id="heroSub">Hôm nay tớ gom hết dũng khí để tạo nên góc nhỏ màu hồng này, vì có một điều tớ không muốn chỉ giữ mãi trong lòng nữa...</p>
+    </div>
+  </section>
+
+  <!-- 2. Đồng hồ đếm thời gian thương thầm / rung động -->
+  <section class="card-win">
+    <div class="card-bar">
+      <span>⏳ Khoảng Thời Gian Tớ Đã Rung Động Vì Cậu</span>
+      <span class="bar-hearts" aria-hidden="true"><i>♡</i><i>♥</i><i>♡</i></span>
+    </div>
+    <div class="card-body" style="text-align:center">
+      <div style="font-weight:800;font-size:15px">Kể từ khoảnh khắc trái tim tớ biết nhớ thương cậu:</div>
+      <div class="timer-grid">
+        <div class="time-box"><div class="time-num" id="mo-val">0</div><div class="time-lbl">Tháng</div></div>
+        <div class="time-box"><div class="time-num" id="d-val">0</div><div class="time-lbl">Ngày</div></div>
+        <div class="time-box"><div class="time-num" id="h-val">00</div><div class="time-lbl">Giờ</div></div>
+        <div class="time-box"><div class="time-num" id="m-val">00</div><div class="time-lbl">Phút</div></div>
+        <div class="time-box"><div class="time-num" id="s-val">00</div><div class="time-lbl">Giây</div></div>
+      </div>
+      <div style="font-size:12.5px;color:var(--ink-soft);margin-top:8px">...và tớ mong được viết tiếp con số này dưới một danh nghĩa đặc biệt hơn ♡</div>
+    </div>
+  </section>
+
+  <!-- 3. Những điều ở cậu làm tớ đổ đứ đừ -->
+  <section class="card-win">
+    <div class="card-bar">
+      <span>🌷 Vì Sao Trái Tim Tớ Lại Chọn Cậu?</span>
+      <span class="bar-hearts" aria-hidden="true"><i>♡</i><i>♥</i><i>♡</i></span>
+    </div>
+    <div class="card-body">
+      <div class="reasons-grid" id="reasonsGrid">
+        <div class="reason-item">
+          <span class="reason-icon">😊</span>
+          <span class="reason-text">Nụ cười của cậu có phép màu xua tan mọi mệt mỏi trong ngày của tớ.</span>
+        </div>
+        <div class="reason-item">
+          <span class="reason-icon">💬</span>
+          <span class="reason-text">Mỗi tin nhắn từ cậu luôn là thông báo khiến tớ mỉm cười nhanh nhất.</span>
+        </div>
+        <div class="reason-item">
+          <span class="reason-icon">🌤️</span>
+          <span class="reason-text">Ở bên cạnh cậu, những khoảnh khắc bình dị nhất cũng trở nên dịu dàng.</span>
+        </div>
+        <div class="reason-item">
+          <span class="reason-icon">💗</span>
+          <span class="reason-text">Vì cậu chính là người làm tớ muốn trở thành phiên bản tốt hơn mỗi ngày.</span>
+        </div>
+      </div>
+      <p class="hint">Chạm vào từng ô nhỏ để thả tim nhé ♡</p>
+    </div>
+  </section>
+
+  <!-- 4. Khung ảnh kỷ niệm Polaroid -->
+  <section class="card-win">
+    <div class="card-bar">
+      <span>📸 Góc Lưu Giữ Kỷ Niệm Đáng Yêu</span>
+      <span class="bar-hearts" aria-hidden="true"><i>♡</i><i>♥</i><i>♡</i></span>
+    </div>
+    <div class="card-body">
+      <div class="gal" id="gal"></div>
+      <p class="hint viewer-only">Chạm vào từng tấm hình để xem rõ hơn nha ♡</p>
+      <p class="hint admin-only">Chạm vào khung trống để tải ảnh lên • Bấm "xóa" để gỡ ảnh</p>
+      <input type="file" accept="image/*" id="fileInput" hidden>
+    </div>
+  </section>
+
+  <!-- 5. Bức thư tỏ tình chân thành -->
+  <section class="card-win">
+    <div class="card-bar">
+      <span>💌 Bức Thư Nhỏ Gửi Tận Đáy Lòng</span>
+      <span class="bar-hearts" aria-hidden="true"><i>♡</i><i>♥</i><i>♡</i></span>
+    </div>
+    <div class="card-body">
+      <div class="letter-seal" id="letterSeal">
+        <div class="seal-wax">♡</div>
+        <strong style="font-size:16px;color:var(--accent)">Phong bì tâm sự gửi riêng cho cậu</strong><br>
+        <span style="font-size:12.5px;color:var(--ink-soft)">(Chạm nhẹ vào con dấu trái tim để mở thư)</span>
+      </div>
+      <div class="letter-paper" id="letterPaper">
+        <p class="letter-greeting" id="letterGreeting">Gửi cậu, người tớ thương rất nhiều,</p>
+        <div id="letterBodyText"></div>
+        <p class="letter-sign" id="letterSign">— Người luôn hướng về cậu ♡</p>
+        <p style="text-align:center;margin:18px 0 0">
+          <button type="button" class="btn-mini alt" id="closeLetterBtn">Gấp thư lại nhẹ nhàng</button>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PHẦN TỎ TÌNH QUAN TRỌNG NHẤT -->
+  <section class="card-win confess-card" id="confessSection">
+    <div class="card-bar">
+      <span>💖 Điều Quan Trọng Nhất Tớ Muốn Hỏi Cậu</span>
+      <span class="bar-hearts" aria-hidden="true"><i>♥</i><i>♥</i><i>♥</i></span>
+    </div>
+    <div class="card-body">
+
+      <!-- Trạng thái chờ câu trả lời -->
+      <div class="confess-stage" id="confessAskState">
+        <!-- Minh họa Gấu/Thỏ ôm tim SVG thuần không bao giờ lỗi ảnh -->
+        <svg class="cute-mascot" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="32" cy="34" r="16" fill="#FFE0EA" stroke="#D65780" stroke-width="3"/>
+          <circle cx="32" cy="34" r="9" fill="#FFB3C9"/>
+          <circle cx="88" cy="34" r="16" fill="#FFE0EA" stroke="#D65780" stroke-width="3"/>
+          <circle cx="88" cy="34" r="9" fill="#FFB3C9"/>
+          <ellipse cx="60" cy="64" rx="40" ry="36" fill="#FFF7FA" stroke="#D65780" stroke-width="3"/>
+          <ellipse cx="40" cy="66" rx="7" ry="4.5" fill="#FF9EBB"/>
+          <ellipse cx="80" cy="66" rx="7" ry="4.5" fill="#FF9EBB"/>
+          <circle cx="46" cy="57" r="4.2" fill="#5C1632"/>
+          <circle cx="44.5" cy="55.5" r="1.4" fill="#FFF"/>
+          <circle cx="74" cy="57" r="4.2" fill="#5C1632"/>
+          <circle cx="72.5" cy="55.5" r="1.4" fill="#FFF"/>
+          <path d="M55 64 Q60 69 65 64" stroke="#5C1632" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+          <path d="M60 104 C60 104 38 90 38 77 C38 70 44 66 50 66 C55 66 58 69 60 73 C62 69 65 66 70 66 C76 66 82 70 82 77 C82 90 60 104 60 104 Z" fill="#FF477E" stroke="#B81D4D" stroke-width="2.5"/>
+        </svg>
+
+        <h2 class="confess-question" id="confessQuestionText">Phương ơi, đồng ý làm người yêu tớ nhé? ♡</h2>
+        <p class="confess-sub" id="confessHintText">Tớ không hứa sẽ mang cả thế giới về cho cậu, nhưng tớ hứa sẽ dành trọn sự dịu dàng và chân thành nhất của tớ cho riêng cậu thôi.</p>
+
+        <div class="confess-playground" id="confessPlayground">
+          <button type="button" class="btn-yes" id="yesBtn">💗 Đồng ý luôn!</button>
+          <button type="button" class="btn-no" id="noBtn">🙈 Để suy nghĩ thêm...</button>
+        </div>
+      </div>
+
+      <!-- Trạng thái sau khi bấm ĐỒNG Ý -->
+      <div class="confess-accepted" id="confessYesState">
+        <div style="font-size:52px;line-height:1;margin-bottom:8px">🥰💐💖</div>
+        <h2 class="confess-question" style="margin-bottom:6px">Yayyy!! Cảm ơn cậu vì đã chọn tớ ♡</h2>
+        <p style="font-size:15.5px;max-width:500px;margin:0 auto">Từ giây phút này, cậu chính thức là ngoại lệ ngọt ngào nhất trong lòng tớ rồi đấy nhé!</p>
+
+        <div class="couple-ticket">
+          <div class="ticket-badge">✨ Chứng Nhận Trái Tim Chung Nhịp ✨</div>
+          <div style="font-size:17px;font-weight:900;color:var(--accent)" id="ticketNames">Tớ ♡ Phương</div>
+          <div class="ticket-time" id="ticketTimestamp">Chính thức từ hôm nay ♡</div>
+          <div style="font-size:12.5px;margin-top:8px;opacity:0.85">📸 Nhớ chụp màn hình khoảnh khắc này gửi cho tớ ngay nha!</div>
+        </div>
+
+        <div class="reply-box">
+          <label for="crushReplyInput" style="display:block;font-size:13.5px;font-weight:800;margin-bottom:6px;color:var(--accent)">💌 Nhắn một câu hồi đáp gửi cho tớ nhé:</label>
+          <textarea id="crushReplyInput" placeholder="Ví dụ: Tớ cũng thích cậu lâu lắm rồi đồ ngốc ạ ♡"></textarea>
+          <div style="display:flex;justify-content:center;gap:10px;margin-top:10px;flex-wrap:wrap">
+            <button type="button" class="btn-mini" id="copyReplyBtn">📋 Sao chép lời hồi đáp để gửi</button>
+            <button type="button" class="btn-mini alt admin-only" id="resetConfessBtn">🔄 Đặt lại câu hỏi (Admin)</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <p class="foot">
+    Góc nhỏ màu hồng dành riêng cho người đặc biệt thứ <span class="heart-pill">01</span> trong tim tớ<br>
+    Được viết nên bằng tất cả sự chân thành ♡
+    <span id="footerAdminTrigger" style="cursor:pointer;opacity:0.4;font-size:12px;margin-left:4px" title="Mở bảng cấu hình">⚙</span>
+  </p>
+</div>
+
+<!-- Modal phóng to ảnh kỷ niệm -->
+<div class="modal" id="imgModal" role="dialog" aria-modal="true" aria-label="Xem ảnh kỷ niệm">
+  <div class="modal-content">
+    <img id="modalImg" src="" alt="Ảnh kỷ niệm">
+    <p id="modalCap" style="font-weight:800;margin:12px 0;color:var(--accent)"></p>
+    <div style="display:flex;justify-content:center;gap:10px">
+      <button type="button" class="btn-mini admin-only" id="modalChangeBtn">Đổi ảnh này</button>
+      <button type="button" class="btn-mini alt" id="modalCloseBtn">Đóng lại</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Quản trị / Cấu hình trang tỏ tình -->
+<div class="modal" id="cfgModal" role="dialog" aria-modal="true" aria-label="Cấu hình trang tỏ tình">
+  <div class="modal-content" style="text-align:left">
+    <h3 style="margin:0 0 12px;font-weight:900;color:var(--accent)">⚙️ Tùy Chỉnh Trang Web Tỏ Tình</h3>
+
+    <div class="cfg-field">
+      <label for="cfgCrushName">Tên người ấy (Crush):</label>
+      <input type="text" id="cfgCrushName" placeholder="Ví dụ: Phương, Linh, Em bé...">
+    </div>
+
+    <div class="cfg-field">
+      <label for="cfgSenderName">Tên / Chữ ký của bạn:</label>
+      <input type="text" id="cfgSenderName" placeholder="Ví dụ: Người luôn thương cậu">
+    </div>
+
+    <div class="cfg-field">
+      <label for="cfgStartDate">Ngày bắt đầu thích / quen nhau:</label>
+      <input type="date" id="cfgStartDate">
+    </div>
+
+    <div class="cfg-field">
+      <label for="cfgQuestion">Câu hỏi tỏ tình chính:</label>
+      <input type="text" id="cfgQuestion" placeholder="Ví dụ: Phương ơi, đồng ý làm người yêu tớ nhé? ♡">
+    </div>
+
+    <div class="cfg-field">
+      <label for="cfgLetter">Nội dung bức thư tỏ tình (xuống dòng tự động tách đoạn):</label>
+      <textarea id="cfgLetter"></textarea>
+    </div>
+
+    <div style="margin-top:14px;padding:12px;background:var(--card-inner);border-radius:14px;border:1.5px dashed var(--border)">
+      <div style="font-size:12px;font-weight:900;color:var(--accent);margin-bottom:7px">🔗 ĐÓNG GÓI & GỬI CHO NGƯỜI ẤY:</div>
+      <button type="button" class="btn-mini" id="copyViewerLinkBtn" style="width:100%;margin-bottom:8px">📋 Sao chép Link Người Xem</button>
+      <button type="button" class="btn-mini alt" id="exportHtmlBtn" style="width:100%">💾 Tải File index.html Đóng Gói (Đã kèm ảnh & thư)</button>
+      <div style="font-size:11.5px;color:var(--ink-soft);margin-top:6px;line-height:1.4">Mẹo: Sau khi chọn đủ 6 ảnh và sửa lời thư ưng ý, bấm tải file <b>index.html</b> này rồi đẩy lên GitHub / Vercel để người ấy mở điện thoại nào cũng thấy trọn vẹn 100%!</div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:8px;flex-wrap:wrap">
+      <button type="button" class="btn-mini alt" id="switchToViewerModalBtn">👀 Xem thử như Khách</button>
+      <div style="display:flex;gap:8px">
+        <button type="button" class="btn-mini alt" id="cfgCancelBtn">Đóng</button>
+        <button type="button" class="btn-mini" id="cfgSaveBtn">Lưu thay đổi ♡</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Nút nổi góc phải dưới -->
+<div class="fixed-tools">
+  <button type="button" class="tool-pill alt admin-only" id="cfgOpenBtn" title="Mở bảng cấu hình">⚙️ Quản trị</button>
+  <button type="button" class="tool-pill alt" id="themeBtn" aria-label="Đổi giao diện sáng tối">🌸 / 🌙</button>
+</div>
+
+<script>
+/* ================= 1. BỘ LƯU TRỮ AN TOÀN (CHỐNG LỖI TRÊN MỌI TRÌNH DUYỆT / IFRAME) ================= */
+function safeGetStorage(key) {
+  try { return localStorage.getItem(key); } catch (e) { return null; }
+}
+function safeSetStorage(key, val) {
+  try { localStorage.setItem(key, val); } catch (e) {}
+}
+function safeRemoveStorage(key) {
+  try { localStorage.removeItem(key); } catch (e) {}
+}
+function safeGetSession(key) {
+  try { return sessionStorage.getItem(key); } catch (e) { return null; }
+}
+function safeSetSession(key, val) {
+  try { sessionStorage.setItem(key, val); } catch (e) {}
+}
+
+/* ================= 2. CẤU HÌNH MẶC ĐỊNH CỦA TRANG TỎ TÌNH ================= */
+function getDefaultStartDate() {
+  var d = new Date();
+  d.setMonth(d.getMonth() - 3);
+  var y = d.getFullYear();
+  var m = ('0' + (d.getMonth() + 1)).slice(-2);
+  var day = ('0' + d.getDate()).slice(-2);
+  return y + '-' + m + '-' + day;
+}
+
+var DEFAULT_CONFIG = {
+  crushName: "Phương",
+  senderName: "Người luôn thương cậu",
+  startDate: getDefaultStartDate(),
+  confessQuestion: "Phương ơi, đồng ý làm người yêu tớ nhé? ♡",
+  letterText: "Đối với tớ, dù một ngày có mệt mỏi đến đâu thì chỉ cần nhìn thấy nụ cười của cậu hay nhận được một dòng tin nhắn nhỏ từ cậu cũng đủ làm cả ngày hôm ấy bỗng hóa dịu dàng.\n\nThời gian qua, cảm xúc tớ dành cho cậu cứ lớn dần lên từng chút một. Không còn chỉ là sự quý mến thoáng qua nữa, mà là thật sự muốn được quan tâm, lắng nghe và đồng hành cùng cậu qua mọi vui buồn.\n\nCảm ơn cậu vì đã xuất hiện rực rỡ như ánh nắng ban mai. Hôm nay, cho phép tớ được bước gần hơn một bước vào thế giới của cậu nhé!",
+  musicUrl: "",
+  caps: [
+    "Khoảnh khắc đầu tiên ♡",
+    "Nụ cười làm tớ say nắng",
+    "Ngày dịu dàng bên nhau",
+    "Góc nhỏ đầy ắp kỷ niệm",
+    "Điều ngọt ngào nhất",
+    "Mong mãi về sau cùng cậu"
+  ],
+  photos: {}
+};
+
+var config = {
+  crushName: safeGetStorage('pink_crushName') !== null ? safeGetStorage('pink_crushName') : DEFAULT_CONFIG.crushName,
+  senderName: safeGetStorage('pink_senderName') !== null ? safeGetStorage('pink_senderName') : DEFAULT_CONFIG.senderName,
+  startDate: safeGetStorage('pink_startDate') || DEFAULT_CONFIG.startDate,
+  confessQuestion: safeGetStorage('pink_question') !== null ? safeGetStorage('pink_question') : DEFAULT_CONFIG.confessQuestion,
+  letterText: safeGetStorage('pink_letter') !== null ? safeGetStorage('pink_letter') : DEFAULT_CONFIG.letterText,
+  musicUrl: DEFAULT_CONFIG.musicUrl || "",
+  caps: DEFAULT_CONFIG.caps.slice()
+};
+
+var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ================= 3. THÔNG BÁO TOAST & HIỆU ỨNG HẠT TIM / HOA RƠI ================= */
+var modeToast = document.getElementById('modeToast');
+var toastTimer = null;
+function showToast(msg) {
+  if (!modeToast) return;
+  modeToast.textContent = msg;
+  modeToast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () {
+    modeToast.classList.remove('show');
+  }, 2700);
+}
+
+function spawnSparkles(rect, count) {
+  if (reduceMotion || !rect) return;
+  var icons = ['💗', '🌸', '♡', '✨', '🌷', '💖'];
+  for (var i = 0; i < count; i++) {
+    var s = document.createElement('div');
+    s.className = 'sp';
+    s.textContent = icons[Math.floor(Math.random() * icons.length)];
+    s.style.left = (rect.left + rect.width / 2) + 'px';
+    s.style.top = (rect.top + rect.height / 2) + 'px';
+    s.style.color = i % 2 ? '#ff477e' : '#ff8fab';
+    s.style.setProperty('--dx', ((Math.random() - 0.5) * 300) + 'px');
+    s.style.setProperty('--dy', (-70 - Math.random() * 210) + 'px');
+    document.body.appendChild(s);
+    setTimeout(function (el) { el.remove(); }, 1250, s);
+  }
+}
+
+function initFallingPetals() {
+  if (reduceMotion) return;
+  var layer = document.getElementById('petalLayer');
+  if (!layer) return;
+  layer.innerHTML = '';
+  var symbols = ['🌸', '💮', '♡', '🌷'];
+  for (var i = 0; i < 14; i++) {
+    var p = document.createElement('span');
+    p.className = 'falling-petal';
+    p.textContent = symbols[i % symbols.length];
+    p.style.left = (Math.random() * 96) + 'vw';
+    p.style.fontSize = (12 + Math.random() * 10) + 'px';
+    p.style.animationDuration = (9 + Math.random() * 9) + 's';
+    p.style.animationDelay = (-Math.random() * 15) + 's';
+    layer.appendChild(p);
+  }
+}
+initFallingPetals();
+
+if (!reduceMotion) {
+  var lastTrail = 0;
+  window.addEventListener('mousemove', function (e) {
+    var now = Date.now();
+    if (now - lastTrail < 95) return;
+    lastTrail = now;
+    var t = document.createElement('span');
+    t.className = 'trail-heart';
+    t.textContent = Math.random() > 0.5 ? '♡' : '🌸';
+    t.style.left = (e.clientX + (Math.random() * 10 - 5)) + 'px';
+    t.style.top = (e.clientY + (Math.random() * 10 - 5)) + 'px';
+    t.style.color = '#ff5c8a';
+    document.body.appendChild(t);
+    setTimeout(function () { t.remove(); }, 1000);
+  });
+}
+
+/* ================= 4. ÁP DỤNG NỘI DUNG TÙY CHỈNH LÊN GIAO DIỆN ================= */
+function renderLetterParagraphs(rawText) {
+  var container = document.getElementById('letterBodyText');
+  if (!container) return;
+  container.innerHTML = '';
+  var parts = String(rawText || '').split(/\n\s*\n|\r?\n/);
+  parts.forEach(function (line) {
+    var trimmed = line.trim();
+    if (!trimmed) return;
+    var p = document.createElement('p');
+    p.style.margin = '0 0 12px';
+    p.textContent = trimmed;
+    container.appendChild(p);
+  });
+}
+
+function applyConfig() {
+  var name = (config.crushName || '').trim();
+  var sender = (config.senderName || '').trim() || 'Người luôn thương cậu';
+
+  document.getElementById('heroTitle').textContent = name ? ('Gửi ' + name + ' ♡') : 'Gửi Cậu, Người Tớ Thương ♡';
+  document.getElementById('gateTitle').textContent = name ? ('Gửi ' + name + ' Thương Mến...') : 'Gửi Người Tớ Thương...';
+  document.title = name ? ('Lời Tỏ Tình Gửi ' + name + ' ♡') : 'Điều Tớ Muốn Nói Với Cậu ♡';
+
+  document.getElementById('letterGreeting').textContent = name
+    ? ('Gửi ' + name + ', người tớ thương rất nhiều,')
+    : 'Gửi cậu, người tớ thương rất nhiều,';
+  document.getElementById('letterSign').textContent = '— ' + sender + ' ♡';
+  renderLetterParagraphs(config.letterText);
+
+  var qText = (config.confessQuestion || '').trim();
+  if (!qText) {
+    qText = name ? (name + ' ơi, đồng ý làm người yêu tớ nhé? ♡') : 'Cậu đồng ý làm người yêu tớ nhé? ♡';
+  }
+  document.getElementById('confessQuestionText').textContent = qText;
+  document.getElementById('ticketNames').textContent = 'Tớ ♡ ' + (name || 'Cậu');
+}
+applyConfig();
+
+/* ================= 5. ĐỒNG HỒ ĐẾM THỜI GIAN RUNG ĐỘNG ================= */
+function updateTimer() {
+  var startDate = new Date(config.startDate);
+  var now = new Date();
+  if (isNaN(startDate.getTime()) || now < startDate) {
+    document.getElementById('mo-val').textContent = '0';
+    document.getElementById('d-val').textContent = '0';
+    document.getElementById('h-val').textContent = '00';
+    document.getElementById('m-val').textContent = '00';
+    document.getElementById('s-val').textContent = '00';
+    return;
+  }
+
+  var months = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
+  var anchor = new Date(startDate.getFullYear(), startDate.getMonth() + months, startDate.getDate(), startDate.getHours(), startDate.getMinutes(), startDate.getSeconds());
+  if (anchor > now) {
+    months--;
+    anchor = new Date(startDate.getFullYear(), startDate.getMonth() + months, startDate.getDate(), startDate.getHours(), startDate.getMinutes(), startDate.getSeconds());
+  }
+
+  var diff = Math.max(0, now.getTime() - anchor.getTime());
+  var days = Math.floor(diff / 86400000);
+  var hours = Math.floor((diff % 86400000) / 3600000);
+  var minutes = Math.floor((diff % 3600000) / 60000);
+  var seconds = Math.floor((diff % 60000) / 1000);
+
+  document.getElementById('mo-val').textContent = months;
+  document.getElementById('d-val').textContent = days;
+  document.getElementById('h-val').textContent = (hours < 10 ? '0' : '') + hours;
+  document.getElementById('m-val').textContent = (minutes < 10 ? '0' : '') + minutes;
+  document.getElementById('s-val').textContent = (seconds < 10 ? '0' : '') + seconds;
+}
+setInterval(updateTimer, 1000);
+updateTimer();
+
+/* ================= 6. TƯƠNG TÁC LÝ DO THÍCH CẬU & BỨC THƯ ================= */
+document.querySelectorAll('.reason-item').forEach(function (card) {
+  card.onclick = function () {
+    card.classList.add('popped');
+    spawnSparkles(card.getBoundingClientRect(), 8);
+    setTimeout(function () { card.classList.remove('popped'); }, 700);
+  };
+});
+
+var letterSeal = document.getElementById('letterSeal');
+var letterPaper = document.getElementById('letterPaper');
+var closeLetterBtn = document.getElementById('closeLetterBtn');
+
+letterSeal.onclick = function () {
+  var rect = letterSeal.getBoundingClientRect();
+  letterSeal.style.display = 'none';
+  letterPaper.style.display = 'block';
+  spawnSparkles(rect, 16);
+};
+
+closeLetterBtn.onclick = function () {
+  letterPaper.style.display = 'none';
+  letterSeal.style.display = 'block';
+};
+
+/* ================= 7. MÁY PHÁT NHẠC LÃNG MẠN + THANH CHỈNH ÂM LƯỢNG ================= */
+var audioCtx = null, masterGain = null, isPlaying = false, audioInterval = null;
+var customAudio = null;
+var playBtn = document.getElementById('playMusicBtn');
+var disc = document.getElementById('musicDisc');
+var musicStatus = document.getElementById('musicStatus');
+var musicTitle = document.getElementById('musicTitle');
+var customAudioBtn = document.getElementById('customAudioBtn');
+var audioFileInput = document.getElementById('audioFileInput');
+var volumeSlider = document.getElementById('volumeSlider');
+var volIcon = document.getElementById('volIcon');
+
+var savedVol = parseFloat(safeGetStorage('pink_music_volume'));
+var currentVolume = (!isNaN(savedVol) && savedVol >= 0 && savedVol <= 1) ? savedVol : 0.75;
+var prevVolume = currentVolume > 0 ? currentVolume : 0.75;
+
+if (config.musicUrl) {
+  customAudio = new Audio(config.musicUrl);
+  customAudio.loop = true;
+  customAudio.volume = currentVolume;
+}
+
+function updateVolIcon(vol) {
+  if (!volIcon) return;
+  if (vol <= 0) volIcon.textContent = '🔇';
+  else if (vol < 0.5) volIcon.textContent = '🔉';
+  else volIcon.textContent = '🔊';
+}
+
+function getMasterGain() {
+  if (!audioCtx) return null;
+  if (!masterGain) {
+    masterGain = audioCtx.createGain();
+    masterGain.gain.setValueAtTime(currentVolume, audioCtx.currentTime);
+    masterGain.connect(audioCtx.destination);
+  }
+  return masterGain;
+}
+
+function setVolume(val, save) {
+  currentVolume = Math.max(0, Math.min(1, parseFloat(val)));
+  if (volumeSlider) volumeSlider.value = currentVolume;
+  if (save) safeSetStorage('pink_music_volume', currentVolume);
+  if (audioCtx && masterGain) {
+    masterGain.gain.setValueAtTime(currentVolume, audioCtx.currentTime);
+  }
+  if (customAudio) {
+    customAudio.volume = currentVolume;
+  }
+  updateVolIcon(currentVolume);
+}
+
+if (volumeSlider) {
+  volumeSlider.value = currentVolume;
+  volumeSlider.oninput = function () {
+    setVolume(this.value, true);
+    if (currentVolume > 0) prevVolume = currentVolume;
+  };
+}
+
+if (volIcon) {
+  volIcon.onclick = function () {
+    if (currentVolume > 0) {
+      prevVolume = currentVolume;
+      setVolume(0, true);
+    } else {
+      setVolume(prevVolume > 0 ? prevVolume : 0.75, true);
+    }
+  };
+}
+updateVolIcon(currentVolume);
+
+// Hợp âm Music Box ngọt ngào (Fmaj7 - Cmaj7 - Dm7 - Bbmaj7)
+var SWEET_CHORDS = [
+  [349.23, 440.00, 523.25, 659.25],
+  [261.63, 329.63, 392.00, 493.88],
+  [293.66, 349.23, 440.00, 523.25],
+  [233.08, 293.66, 349.23, 440.00]
+];
+var chordIdx = 0;
+
+function playMusicBoxChord(notes) {
+  if (!audioCtx) return;
+  var now = audioCtx.currentTime;
+  var dest = getMasterGain() || audioCtx.destination;
+  notes.forEach(function (freq, idx) {
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = idx === 3 ? 'sine' : 'triangle';
+    var startAt = now + idx * 0.14;
+    osc.frequency.setValueAtTime(freq, startAt);
+
+    gain.gain.setValueAtTime(0.0008, startAt);
+    gain.gain.exponentialRampToValueAtTime(0.075, startAt + 0.12);
+    gain.gain.exponentialRampToValueAtTime(0.0001, startAt + 2.9);
+
+    osc.connect(gain);
+    gain.connect(dest);
+    osc.start(startAt);
+    osc.stop(startAt + 3.05);
+  });
+}
+
+function startMusic() {
+  if (customAudio && customAudio.src) {
+    customAudio.volume = currentVolume;
+    customAudio.play().then(function () {
+      isPlaying = true;
+      disc.classList.add('playing');
+      playBtn.textContent = '⏸ Tạm dừng';
+      musicStatus.textContent = 'Đang phát bài hát yêu thích ♡';
+    }).catch(function () {});
+    return;
+  }
+
+  var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return;
+  if (!audioCtx) audioCtx = new AudioContextClass();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  getMasterGain();
+
+  isPlaying = true;
+  disc.classList.add('playing');
+  playBtn.textContent = '⏸ Tạm dừng';
+  musicStatus.textContent = 'Đang ngân nga giai điệu tình yêu...';
+
+  if (audioInterval) clearInterval(audioInterval);
+  playMusicBoxChord(SWEET_CHORDS[chordIdx % SWEET_CHORDS.length]);
+  audioInterval = setInterval(function () {
+    chordIdx++;
+    playMusicBoxChord(SWEET_CHORDS[chordIdx % SWEET_CHORDS.length]);
+  }, 3200);
+}
+
+function stopMusic() {
+  isPlaying = false;
+  disc.classList.remove('playing');
+  playBtn.textContent = '▶ Bật nhạc';
+  musicStatus.textContent = 'Đang tạm dừng';
+  if (audioInterval) clearInterval(audioInterval);
+  if (customAudio) customAudio.pause();
+}
+
+playBtn.onclick = function () {
+  if (!isPlaying) startMusic();
+  else stopMusic();
+};
+
+customAudioBtn.onclick = function () { audioFileInput.click(); };
+audioFileInput.onchange = function () {
+  var file = this.files[0];
+  if (!file) return;
+  stopMusic();
+  if (!customAudio) customAudio = new Audio();
+  customAudio.volume = currentVolume;
+  customAudio.src = URL.createObjectURL(file);
+  customAudio.loop = true;
+  musicTitle.textContent = file.name.replace(/\.[^/.]+$/, '');
+  startMusic();
+};
+
+/* Màn hình mở phong bì chào đầu trang */
+var welcomeGate = document.getElementById('welcomeGate');
+var enterSiteBtn = document.getElementById('enterSiteBtn');
+enterSiteBtn.onclick = function () {
+  var rect = enterSiteBtn.getBoundingClientRect();
+  welcomeGate.classList.add('hide');
+  spawnSparkles(rect, 22);
+  if (!isPlaying) startMusic();
+};
+
+/* ================= 8. THƯ VIỆN ẢNH POLAROID & LIGHTBOX ================= */
+var gal = document.getElementById('gal');
+var fileInput = document.getElementById('fileInput');
+var imgModal = document.getElementById('imgModal');
+var modalImg = document.getElementById('modalImg');
+var modalCap = document.getElementById('modalCap');
+var currentPick = 0;
+var rots = [-3, 2.5, -1.8, 3, -2.5, 1.8];
+var isAdmin = false;
+
+function getSavedPhoto(i) {
+  return safeGetStorage('pink_photo_' + i) || (DEFAULT_CONFIG.photos && DEFAULT_CONFIG.photos[i]) || '';
+}
+
+function renderGallery() {
+  if (!gal) return;
+  gal.innerHTML = '';
+  config.caps.forEach(function (cap, i) {
+    var d = document.createElement('div');
+    d.className = 'pol';
+    d.tabIndex = 0;
+    d.setAttribute('role', 'button');
+    d.style.setProperty('--r', rots[i % rots.length] + 'deg');
+
+    var src = getSavedPhoto(i);
+    var inner = src ? '<img src="' + src + '" alt="' + cap + '">' : '<span aria-hidden="true">🌸</span>';
+    var delBtn = (src && isAdmin)
+      ? '<div class="pol-actions admin-only"><button type="button" class="pol-btn remove-photo-btn" data-idx="' + i + '">xóa</button></div>'
+      : '';
+
+    d.innerHTML = '<div class="ph">' + inner + '</div><p>' + cap + '</p>' + delBtn;
+
+    d.onclick = function (e) {
+      if (e.target.classList.contains('remove-photo-btn')) return;
+      currentPick = i;
+      var curSrc = getSavedPhoto(i);
+      if (curSrc) {
+        modalImg.src = curSrc;
+        modalCap.textContent = cap;
+        imgModal.classList.add('active');
+      } else if (isAdmin) {
+        fileInput.value = '';
+        fileInput.click();
+      } else {
+        showToast('Khung hình này đang chờ tụi mình lấp đầy kỷ niệm chung đó ♡');
+      }
+    };
+    gal.appendChild(d);
+  });
+
+  document.querySelectorAll('.remove-photo-btn').forEach(function (btn) {
+    btn.onclick = function (e) {
+      e.stopPropagation();
+      var idx = this.getAttribute('data-idx');
+      safeRemoveStorage('pink_photo_' + idx);
+      if (DEFAULT_CONFIG.photos && DEFAULT_CONFIG.photos[idx]) {
+        delete DEFAULT_CONFIG.photos[idx];
+      }
+      renderGallery();
+      showToast('Đã gỡ ảnh khung số ' + (parseInt(idx, 10) + 1));
+    };
+  });
+}
+
+fileInput.onchange = function () {
+  var f = fileInput.files[0];
+  if (!f) return;
+  var fr = new FileReader();
+  fr.onload = function () {
+    safeSetStorage('pink_photo_' + currentPick, fr.result);
+    if (!DEFAULT_CONFIG.photos) DEFAULT_CONFIG.photos = {};
+    DEFAULT_CONFIG.photos[currentPick] = fr.result;
+    renderGallery();
+    imgModal.classList.remove('active');
+    showToast('Đã thêm ảnh kỷ niệm ♡');
+  };
+  fr.readAsDataURL(f);
+};
+
+document.getElementById('modalCloseBtn').onclick = function () { imgModal.classList.remove('active'); };
+document.getElementById('modalChangeBtn').onclick = function () { fileInput.value = ''; fileInput.click(); };
+imgModal.onclick = function (e) { if (e.target === imgModal) imgModal.classList.remove('active'); };
+
+/* ================= 9. LOGIC TỎ TÌNH TƯƠNG TÁC (NÚT ĐỒNG Ý & NÚT NÉ DỄ THƯƠNG) ================= */
+var yesBtn = document.getElementById('yesBtn');
+var noBtn = document.getElementById('noBtn');
+var playground = document.getElementById('confessPlayground');
+var askState = document.getElementById('confessAskState');
+var yesState = document.getElementById('confessYesState');
+var ticketTimestamp = document.getElementById('ticketTimestamp');
+var dodgeCount = 0;
+
+var NO_MESSAGES = [
+  'Ơ kìa bấm nhầm nút rồi 🥺',
+  'Suy nghĩ lại xíu đi mà 👉👈',
+  'Hứa sẽ chiều cậu nhất luôn!',
+  'Nút màu hồng bên cạnh xinh hơn kìa ♡',
+  'Đừng từ chối trái tim nhỏ này nha 😭',
+  'Cho tớ một cơ hội thương cậu đi!',
+  'Bấm Đồng Ý là có người thương liền á 🌸',
+  'Năn nỉ luôn đó người đẹp ơi 💗'
+];
+
+function dodgeNoButton(e) {
+  if (e && e.type === 'touchstart') e.preventDefault();
+  dodgeCount++;
+  noBtn.textContent = NO_MESSAGES[(dodgeCount - 1) % NO_MESSAGES.length];
+
+  // Phóng to nhẹ nút Đồng Ý để khích lệ đáng yêu
+  var scale = Math.min(1 + dodgeCount * 0.08, 1.55);
+  yesBtn.style.transform = 'scale(' + scale.toFixed(2) + ')';
+
+  // Di chuyển nút Không trong phạm vi an toàn của khung confessPlayground
+  var boxRect = playground.getBoundingClientRect();
+  var btnRect = noBtn.getBoundingClientRect();
+  playground.style.minHeight = '165px';
+
+  var maxX = Math.max(10, boxRect.width - btnRect.width - 16);
+  var maxY = Math.max(10, 155 - btnRect.height - 10);
+  var randX = Math.floor(Math.random() * maxX);
+  var randY = Math.floor(Math.random() * maxY);
+
+  noBtn.style.position = 'absolute';
+  noBtn.style.left = randX + 'px';
+  noBtn.style.top = randY + 'px';
+}
+
+noBtn.addEventListener('mouseenter', dodgeNoButton);
+noBtn.addEventListener('touchstart', dodgeNoButton, { passive: false });
+noBtn.addEventListener('click', dodgeNoButton);
+
+function formatVietnameseNow() {
+  var d = new Date();
+  var hh = ('0' + d.getHours()).slice(-2);
+  var mm = ('0' + d.getMinutes()).slice(-2);
+  var dd = ('0' + d.getDate()).slice(-2);
+  var mo = ('0' + (d.getMonth() + 1)).slice(-2);
+  var yy = d.getFullYear();
+  return 'Chính thức đồng ý lúc ' + hh + ':' + mm + ' • Ngày ' + dd + '/' + mo + '/' + yy + ' ♡';
+}
+
+function showAcceptedCelebration(savedTimeStr, burst) {
+  askState.style.display = 'none';
+  yesState.classList.add('show');
+  ticketTimestamp.textContent = savedTimeStr || formatVietnameseNow();
+
+  if (burst && !reduceMotion) {
+    var centerRect = { left: window.innerWidth / 2 - 20, top: window.innerHeight / 2 - 20, width: 40, height: 40 };
+    spawnSparkles(centerRect, 32);
+    setTimeout(function () { spawnSparkles(centerRect, 26); }, 380);
+    setTimeout(function () { spawnSparkles(centerRect, 24); }, 800);
+  }
+}
+
+// Khôi phục nếu người ấy đã bấm Đồng Ý trước đó trên máy này
+var existingYesTime = safeGetStorage('pink_accepted_at');
+if (existingYesTime) {
+  showAcceptedCelebration(existingYesTime, false);
+}
+
+yesBtn.onclick = function () {
+  var stamp = formatVietnameseNow();
+  safeSetStorage('pink_accepted_at', stamp);
+  showAcceptedCelebration(stamp, true);
+  if (!isPlaying) startMusic();
+};
+
+document.getElementById('copyReplyBtn').onclick = function () {
+  var txt = document.getElementById('crushReplyInput').value.trim();
+  var msgToCopy = txt
+    ? ('💖 Lời hồi đáp gửi cậu: "' + txt + '" (' + ticketTimestamp.textContent + ')')
+    : ('💖 Tớ đồng ý làm người yêu cậu rồi nhé! (' + ticketTimestamp.textContent + ')');
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(msgToCopy).then(function () {
+      showToast('📋 Đã sao chép! Dán gửi qua tin nhắn cho người ấy ngay nha ♡');
+    }).catch(function () {
+      prompt('Sao chép lời nhắn bên dưới:', msgToCopy);
+    });
+  } else {
+    prompt('Sao chép lời nhắn bên dưới:', msgToCopy);
+  }
+};
+
+document.getElementById('resetConfessBtn').onclick = function () {
+  safeRemoveStorage('pink_accepted_at');
+  yesState.classList.remove('show');
+  askState.style.display = '';
+  dodgeCount = 0;
+  yesBtn.style.transform = '';
+  noBtn.style.position = '';
+  noBtn.style.left = '';
+  noBtn.style.top = '';
+  noBtn.textContent = '🙈 Để suy nghĩ thêm...';
+  showToast('Đã đặt lại phần câu hỏi tỏ tình!');
+};
+
+/* ================= 10. QUẢN TRỊ ADMIN / NGƯỜI XEM (KHÔNG CẦN LOGIN) & ĐÓNG GÓI HTML ================= */
+function checkIsAdminUrl() {
+  try {
+    var search = (window.location.search || '').toLowerCase();
+    var hash = (window.location.hash || '').toLowerCase();
+    return search.indexOf('admin') !== -1 || hash.indexOf('admin') !== -1;
+  } catch (e) {
+    return false;
+  }
+}
+
+if (checkIsAdminUrl()) {
+  isAdmin = true;
+  safeSetSession('pink_mode', 'admin');
+} else {
+  isAdmin = (safeGetSession('pink_mode') === 'admin');
+}
+
+function setMode(adminState, showFeedback) {
+  isAdmin = !!adminState;
+  if (isAdmin) {
+    document.body.classList.remove('is-viewer');
+    document.body.classList.add('is-admin');
+    safeSetSession('pink_mode', 'admin');
+    if (showFeedback) showToast('👑 Đã bật Chế độ Quản Trị (Chỉnh sửa tự do)');
+  } else {
+    document.body.classList.remove('is-admin');
+    document.body.classList.add('is-viewer');
+    safeSetSession('pink_mode', 'viewer');
+    if (showFeedback) showToast('🌸 Đang xem giao diện của Người Ấy');
+  }
+  renderGallery();
+}
+
+renderGallery();
+setMode(isAdmin, false);
+
+var cfgModal = document.getElementById('cfgModal');
+function openCfgModal() {
+  document.getElementById('cfgCrushName').value = config.crushName || '';
+  document.getElementById('cfgSenderName').value = config.senderName || '';
+  document.getElementById('cfgStartDate').value = config.startDate || DEFAULT_CONFIG.startDate;
+  document.getElementById('cfgQuestion').value = config.confessQuestion || '';
+  document.getElementById('cfgLetter').value = config.letterText || '';
+  cfgModal.classList.add('active');
+}
+
+document.getElementById('cfgOpenBtn').onclick = openCfgModal;
+document.getElementById('openSettingsTopBtn').onclick = openCfgModal;
+document.getElementById('cfgCancelBtn').onclick = function () { cfgModal.classList.remove('active'); };
+cfgModal.onclick = function (e) { if (e.target === cfgModal) cfgModal.classList.remove('active'); };
+
+document.getElementById('cfgSaveBtn').onclick = function () {
+  config.crushName = document.getElementById('cfgCrushName').value.trim();
+  config.senderName = document.getElementById('cfgSenderName').value.trim() || 'Người luôn thương cậu';
+  config.startDate = document.getElementById('cfgStartDate').value || DEFAULT_CONFIG.startDate;
+  config.confessQuestion = document.getElementById('cfgQuestion').value.trim();
+  config.letterText = document.getElementById('cfgLetter').value.trim() || DEFAULT_CONFIG.letterText;
+
+  safeSetStorage('pink_crushName', config.crushName);
+  safeSetStorage('pink_senderName', config.senderName);
+  safeSetStorage('pink_startDate', config.startDate);
+  safeSetStorage('pink_question', config.confessQuestion);
+  safeSetStorage('pink_letter', config.letterText);
+
+  applyConfig();
+  updateTimer();
+  cfgModal.classList.remove('active');
+  showToast('Đã lưu nội dung trang tỏ tình ♡');
+};
+
+document.getElementById('previewViewerBtn').onclick = function () { setMode(false, true); };
+document.getElementById('switchToViewerModalBtn').onclick = function () {
+  cfgModal.classList.remove('active');
+  setMode(false, true);
+};
+
+// Chạm 3 lần vào biểu tượng 🌸 ở đầu trang để mở nhanh quyền Quản trị
+var emblemTaps = 0, emblemTimer = null;
+document.getElementById('secretEmblem').onclick = function () {
+  emblemTaps++;
+  clearTimeout(emblemTimer);
+  emblemTimer = setTimeout(function () { emblemTaps = 0; }, 1200);
+  if (emblemTaps >= 3) {
+    emblemTaps = 0;
+    var next = !isAdmin;
+    setMode(next, true);
+    if (next) openCfgModal();
+  }
+};
+
+document.getElementById('footerAdminTrigger').onclick = function () {
+  setMode(true, true);
+  openCfgModal();
+};
+
+window.addEventListener('hashchange', function () {
+  if (checkIsAdminUrl()) {
+    welcomeGate.classList.add('hide');
+    setMode(true, true);
+    openCfgModal();
+  } else {
+    setMode(false, true);
+  }
+});
+
+if (checkIsAdminUrl()) {
+  welcomeGate.classList.add('hide');
+  setTimeout(openCfgModal, 350);
+}
+
+// Nút sao chép link sạch gửi cho người ấy
+document.getElementById('copyViewerLinkBtn').onclick = function () {
+  var cleanUrl = window.location.origin + window.location.pathname;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(cleanUrl).then(function () {
+      showToast('📋 Đã sao chép Link gửi cho người ấy!');
+    }).catch(function () {
+      prompt('Sao chép đường dẫn bên dưới:', cleanUrl);
+    });
+  } else {
+    prompt('Sao chép đường dẫn bên dưới:', cleanUrl);
+  }
+};
+
+// Nút xuất file index.html sạch sẽ, đóng gói sẵn ảnh & lời thư cho Vercel/GitHub
+document.getElementById('exportHtmlBtn').onclick = function () {
+  var photosMap = {};
+  for (var i = 0; i < config.caps.length; i++) {
+    var p = getSavedPhoto(i);
+    if (p) photosMap[i] = p;
+  }
+  var exportConfig = {
+    crushName: config.crushName,
+    senderName: config.senderName,
+    startDate: config.startDate,
+    confessQuestion: config.confessQuestion,
+    letterText: config.letterText,
+    musicUrl: config.musicUrl || "",
+    caps: config.caps,
+    photos: photosMap
+  };
+
+  // Clone DOM và đưa mọi trạng thái động về mặc định sạch sẽ cho người nhận mở từ đầu
+  var clone = document.documentElement.cloneNode(true);
+  var cBody = clone.querySelector('body');
+  if (cBody) cBody.className = 'is-viewer';
+
+  var cGate = clone.querySelector('#welcomeGate');
+  if (cGate) cGate.classList.remove('hide');
+
+  var cCfg = clone.querySelector('#cfgModal');
+  if (cCfg) cCfg.classList.remove('active');
+
+  var cImgModal = clone.querySelector('#imgModal');
+  if (cImgModal) cImgModal.classList.remove('active');
+
+  var cToast = clone.querySelector('#modeToast');
+  if (cToast) cToast.classList.remove('show');
+
+  var cSeal = clone.querySelector('#letterSeal');
+  var cPaper = clone.querySelector('#letterPaper');
+  if (cSeal) cSeal.style.display = '';
+  if (cPaper) cPaper.style.display = '';
+
+  var cAsk = clone.querySelector('#confessAskState');
+  var cYes = clone.querySelector('#confessYesState');
+  if (cAsk) cAsk.style.display = '';
+  if (cYes) cYes.classList.remove('show');
+
+  var cGal = clone.querySelector('#gal');
+  if (cGal) cGal.innerHTML = '';
+
+  var cPetals = clone.querySelector('#petalLayer');
+  if (cPetals) cPetals.innerHTML = '';
+
+  clone.querySelectorAll('.sp, .trail-heart').forEach(function (el) { el.remove(); });
+
+  var rawHtml = '<!DOCTYPE html>\n' + clone.outerHTML;
+  var regex = /var DEFAULT_CONFIG\s*=\s*\{[\s\S]*?\};/;
+  var replacement = 'var DEFAULT_CONFIG = ' + JSON.stringify(exportConfig, null, 2) + ';';
+  var finalHtml = rawHtml.replace(regex, replacement);
+
+  var blob = new Blob([finalHtml], { type: 'text/html;charset=utf-8' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'index.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  showToast('💾 Đã tải về file index.html sẵn sàng up lên Vercel!');
+};
+
+/* ================= 11. CHUYỂN ĐỔI SÁNG / TỐI (SAKURA LIGHT / VELVET ROSE NIGHT) ================= */
+var rootEl = document.documentElement;
+document.getElementById('themeBtn').onclick = function () {
+  var cur = rootEl.getAttribute('data-theme');
+  rootEl.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+};
+</script>
+</body>
+</html>
